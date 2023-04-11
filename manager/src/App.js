@@ -5,7 +5,7 @@ import DetailList from "./components/detailList/DetailList";
 import Warehouse from "./components/warehouse/Warehouse";
 import Category from "./components/category/Category";
 import Detail from "./components/detail/Detail";
-
+import Error404 from "./components/Erros404/Erros404";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
                 <Route exact path="/detailList" element={<DetailList />} />
                 <Route exact path="/warehouse" element={<Warehouse />} />
                 <Route exact path="/detailList/:id" element={<Detail/>} />
-               
+                <Route path="/*" element={<Error404 />}></Route>
               </Routes>
             </section>
           </Router>
