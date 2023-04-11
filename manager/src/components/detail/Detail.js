@@ -25,14 +25,14 @@ function Detail() {
 
   //ПОЛУЧЕНИЕ ВСЕХ ДЕТАЛЕЙ
   async function GetAllData() {
-    const result = await getAllData("http://localhost:7083/detail");
+    const result = await getAllData("http://egorhi-001-site1.htempurl.com/detail");
     setData(result);
   }
   //ДОБАВЛЕНИЕ
   async function AddData() {
     const { model, vendorCode, description, compatibleVehicles, catId } =
       editData;
-    const result = await addData("http://localhost:7083/detail/create", {
+    const result = await addData("http://egorhi-001-site1.htempurl.com/detail/create", {
       model: model,
       vendorCode: vendorCode,
       description: description,
@@ -52,7 +52,7 @@ function Detail() {
   //УДАЛЕНИЕ
   async function RemoveData(id) {
     const result = await removeData(
-      `http://localhost:7083/detail/delete/${id}`
+      `http://egorhi-001-site1.htempurl.com/detail/delete/${id}`
     );
     if (result) {
       const newData = data.filter((item) => item.id !== id);
@@ -63,7 +63,7 @@ function Detail() {
   async function UpdateData() {
     const { id, model, vendorCode, description, compatibleVehicles, catId } =
       editData;
-    const result = await updateData("http://localhost:7083/detail/update", {
+    const result = await updateData("http://egorhi-001-site1.htempurl.com/detail/update", {
       id: Number(id),
       model: model,
       vendorCode: vendorCode,

@@ -4,7 +4,6 @@ async function getAllData(url) {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Origin': 'http://localhost:3000'
         },
         mode: 'cors'
       });

@@ -24,7 +24,7 @@ function Warehouse() {
 
   //ПОЛУЧЕНИЕ ВСЕХ СКЛАДОВ
   async function GetData() {
-    const result = await getAllData("http://localhost:7083/warehouse");
+    const result = await getAllData("http://egorhi-001-site1.htempurl.com/warehouse");
     setData(result);
   }
   //ПОЛУЧЕНИЕ СКЛАДА ПО ID
@@ -46,7 +46,7 @@ function Warehouse() {
     setValidity({ name: true, address: true });
     if (validate()) {
       const { name, address } = editData;
-      const result = await addData("http://localhost:7083/warehouse/create", { name, address });
+      const result = await addData("http://egorhi-001-site1.htempurl.com/warehouse/create", { name, address });
       setData([...data, result]);
       setModalVisible(false);
       setEditData({ name: "", address: "" });
@@ -54,7 +54,7 @@ function Warehouse() {
   }
   //УДАЛЕНИЕ
   async function RemoveData(id) {
-    const result = await removeData(`http://localhost:7083/warehouse/delete/${id}`);
+    const result = await removeData(`http://egorhi-001-site1.htempurl.com/warehouse/delete/${id}`);
     if (result) {
       const newData = data.filter((item) => item.id !== id);
       setData(newData);
@@ -65,7 +65,7 @@ function Warehouse() {
     setValidity({ name: true, address: true });
     if (validate()) {
       const { id, name, address } = editData;
-      const result = await updateData("/warehouse/update", {
+      const result = await updateData("http://egorhi-001-site1.htempurl.com/warehouse/update", {
         id: Number(id),
         name,
         address,
