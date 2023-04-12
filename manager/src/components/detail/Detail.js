@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef } from "react";
+import { useParams } from 'react-router-dom';
 import styles from "../../App.css";
 import {getAllData,addData,removeData,updateData} from "../../modules/requests";
 import './Detail.css';
 function Detail() {
   const [filterModel, setFilterModel] = useState('');
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({});
     const [editData, setEditData] = useState({model: '', vendorCode: '', description: '', compatibleVehicles: '', catId: 0});
     const [modalVisible, setModalVisible] = useState(false);
     const isMountedRef = useRef(false);
+    const { id } = useParams();
     const [validity, setValidity] = useState({
         model: true,
         vendorCode: true,
@@ -26,11 +28,10 @@ function Detail() {
 
   //ПОЛУЧЕНИЕ ВСЕХ ДЕТАЛЕЙ
   async function GetAllData() {
-    const result = await getAllData("http://egorhi-001-site1.htempurl.com/detail");
+    const result = await getAllData(`http://egorhi-001-site1.htempurl.com/detail/${id}`);
     setData(result);
   }
   //ДОБАВЛЕНИЕ
-   
   async function AddData() {
     setValidity({model: true, vendorCode: true,description: true,compatibleVehicles: true,catId: true})
     if(validate()){
@@ -105,31 +106,27 @@ function validate() {
          <div className='content__modal'>
            <div className='content__block-modal'>
            <button className='content__cancel-btn-modal' onClick={Cancel}>X</button>
-           <input className='main-input' placeholder="Model..." value={editData.model}
-              onChange={(e) =>
-                setEditData({ ...editData, model: e.target.value })
-              }
-            />
-           <input className='main-input' placeholder="Vendor Code..." value={editData.vendorCode}
-              onChange={(e) =>
-                setEditData({ ...editData, vendorCode: e.target.value })
-              }
-            />
-            <input className='main-input' placeholder="Description..." value={editData.description}
-              onChange={(e) =>
-                setEditData({ ...editData, description: e.target.value })
-              }
-            />
-            <input className='main-input' placeholder="Compatible Vehicles..." value={editData.compatibleVehicles}
-              onChange={(e) =>
-                setEditData({ ...editData, compatibleVehicles: e.target.value })
-              }
-            />
-            <input className='main-input' type={"number"} placeholder="Category ID..." value={editData.catId}
-              onChange={(e) =>
-                setEditData({ ...editData, catId: e.target.value })
-              }
-            />
+
+                    <input placeholder='Model...' value={editData.model} 
+                    className={!validity.model ? "main-input-invalid": "main-input"}
+                    onChange={(e) => setEditData({...editData, model: e.target.value})}></input>
+
+                    <input placeholder='Vendor Code...' value={editData.vendorCode} 
+                    className={!validity.vendorCode ? "main-input-invalid": "main-input"}
+                    onChange={(e) => setEditData({...editData, vendorCode: e.target.value})}></input>
+
+                    <input placeholder='Description...' value={editData.description}
+                    className={!validity.description ? "main-input-invalid": "main-input"} 
+                    onChange={(e) => setEditData({...editData, description: e.target.value})}></input>
+
+                    <input placeholder='Compatible Vehicles...' value={editData.compatibleVehicles} 
+                    className={!validity.compatibleVehicles ? "main-input-invalid": "main-input"} 
+                    onChange={(e) => setEditData({...editData, compatibleVehicles: e.target.value})}></input>
+
+                    <input type={'number'} placeholder='Category ID...' value={editData.catId} 
+                    className={!validity.catId ? "main-input-invalid": "main-input"} 
+                    onChange={(e) => setEditData({...editData, catId: e.target.value})}></input>
+
             {!editData.id ? (
               <button className='content__add-btn-modal main-btn' onClick={AddData}>
                 Add
@@ -144,48 +141,41 @@ function validate() {
       )}
       
       <div className='content__block-main main-block'>
-      {!data ? (<span className='table__no-connect'>No category found</span>) : (
-          data
-            .filter((item) =>
-              item.model.toLowerCase().includes(filterModel.toLowerCase())
-            )
-            .map((item) => {
-              return (
-                <div className='block__card' key={item.id}>
+      {!data ? (<span className='table__no-connect'>No detail found</span>) : (
+          
+                <div className='block__card' key={data.id}>
                   <div className='block__info'>
-                    <p className='block__field'>{item.model}</p>
+                    <p className='block__field'>{data.model}</p>
                       <p className='block__field'>
-                        Vendor code: {item.vendorCode}
+                        Vendor code: {data.vendorCode}
                       </p>
-                      <p className='block__field'>{item.description}</p>
+                      <p className='block__field'>{data.description}</p>
                       <p className='block__field'>
-                        Compatible Vehicles: {item.compatibleVehicles}
+                        Compatible Vehicles: {data.compatibleVehicles}
                       </p>
                       <p className='block__field'>
-                        Category id: {item.catId}
+                        Category id: {data.catId}
                       </p>
                     
                   </div>
                   <div className="block__btns">
                   <button
                     className='block__btn main-btn'
-                    onClick={() => RemoveData(item.id)}
+                    onClick={() => RemoveData(data.id)}
                   >
                     Remove
                   </button>
                   <button
                     className='block__btn main-btn'
-                    onClick={() => EditData(item)}
+                    onClick={() => EditData(data)}
                   >
                     Update
                   </button>
                   </div>
                 </div>
-              );
-            })
-        )}
-      </div>
+      )}
     </div>
-  );
-}
+    </div>
+)};
+
 export default Detail;
