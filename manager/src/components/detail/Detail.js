@@ -30,15 +30,8 @@ function Detail() {
   }
   //ДОБАВЛЕНИЕ
   async function AddData() {
-    const { model, vendorCode, description, compatibleVehicles, catId } =
-      editData;
-    const result = await addData("http://egorhi-001-site1.htempurl.com/detail/create", {
-      model: model,
-      vendorCode: vendorCode,
-      description: description,
-      compatibleVehicles: compatibleVehicles,
-      catId: Number(catId),
-    });
+    const { model, vendorCode, description, compatibleVehicles, catId } = editData;
+    const result = await addData(`http://egorhi-001-site1.htempurl.com/detail?model=${model}&vendorCode=${vendorCode}&description=${description}&compatibleVehicles=${compatibleVehicles}$catId=${catId}`);
     setData([...data, result]);
     setModalVisible(false);
     setEditData({
@@ -52,7 +45,7 @@ function Detail() {
   //УДАЛЕНИЕ
   async function RemoveData(id) {
     const result = await removeData(
-      `http://egorhi-001-site1.htempurl.com/detail/delete/${id}`
+      `http://egorhi-001-site1.htempurl.com/detail/${id}`
     );
     if (result) {
       const newData = data.filter((item) => item.id !== id);
@@ -63,14 +56,7 @@ function Detail() {
   async function UpdateData() {
     const { id, model, vendorCode, description, compatibleVehicles, catId } =
       editData;
-    const result = await updateData("http://egorhi-001-site1.htempurl.com/detail/update", {
-      id: Number(id),
-      model: model,
-      vendorCode: vendorCode,
-      description: description,
-      compatibleVehicles: compatibleVehicles,
-      catId: Number(catId),
-    });
+    const result = await updateData(`http://egorhi-001-site1.htempurl.com/detail/${id}?model=${model}&vendorCode=${vendorCode}&description=${description}&compatibleVehicles=${compatibleVehicles}$catId=${catId}`);
     if (result) {
       const newData = [...data];
       const index = newData.findIndex((item) => item.id === Number(id));

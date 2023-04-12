@@ -18,23 +18,20 @@ function DetailList(){
     //ПОЛУЧЕНИЕ ВСЕХ СПИСКОВ
     async function GetAllData(){
         const result = await getAllData("http://egorhi-001-site1.htempurl.com/detailList");
+        console.log(result)
         setData(result);
     }
     //ДОБАВЛЕНИЕ
     async function AddData(){
         const {warehouseId, detailId, count} = editData;
-        const result = await addData("http://egorhi-001-site1.htempurl.com/detailList/create", {
-            warehouseId: Number(warehouseId),
-            detailId: Number(detailId),
-            count: Number(count)
-            });
+        const result = await addData(`http://egorhi-001-site1.htempurl.com/detailList?warehouseId=${warehouseId}&detailId=${detailId}&count=${count}`);
         setData([...data, result]);
         setModalVisible(false);
         setEditData({warehouseId: 0, detailId: 0, count: 0});
     };
     //УДАЛЕНИЕ
     async function RemoveData(id){
-        const result = await removeData(`http://egorhi-001-site1.htempurl.com/detailList/delete/${id}`);
+        const result = await removeData(`http://egorhi-001-site1.htempurl.com/detailList/${id}`);
         if(result){
             const newData = data.filter(item => item.id !== id);
             setData(newData);
@@ -43,12 +40,7 @@ function DetailList(){
      //ОБНОВЛЕНИЕ
      async function UpdateData() {
         const {id, warehouseId, detailId, count} = editData;
-        const result = await updateData("http://egorhi-001-site1.htempurl.com/detailList/update", {
-            id: Number(id),
-            warehouseId: Number(warehouseId),
-            detailId: Number(detailId),
-            count: Number(count)
-            });
+        const result = await updateData(`http://egorhi-001-site1.htempurl.com/detailList/${id}?warehouseId=${warehouseId}&detailId=${detailId}&count=${count}`);
             if(result){
                 const newData = [...data];
                 const index = newData.findIndex(item => item.id === Number(id));

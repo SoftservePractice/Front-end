@@ -67,8 +67,8 @@ function Category(){
      setValidity({name: true, parentCategory: true});
      if(validate()){
          const {name, parentCategory} = editData;
-         let tmp = parentCategory ? Number(parentCategory) : null;
-         const result = await addData(`http://egorhi-001-site1.htempurl.com/category?name=${name}&parentCategory=${tmp}`);
+         let value = parentCategory ? parentCategory : '';
+         const result = await addData(`http://egorhi-001-site1.htempurl.com/category?name=${name}&parentCategory=${value}`);
          console.log(result)
          setData([...data, result])
          setModalVisible(false);
@@ -96,7 +96,8 @@ async function UpdateData() {
     setValidity({name: true, parentCategory: true});
     if(validate()){
         const {id, name, parentCategory} = editData;
-        const result = await updateData(`http://egorhi-001-site1.htempurl.com/category/${id}?name=${name}&parentCategory=${parentCategory}`);
+        let value = parentCategory ? parentCategory : '';
+        const result = await updateData(`http://egorhi-001-site1.htempurl.com/category/${id}?name=${name}&parentCategory=${value}`);
         if(result){
             const newData = [...data];
             const index = newData.findIndex(item => item.id === Number(id));
