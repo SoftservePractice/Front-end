@@ -8,6 +8,7 @@ import Detail from "./components/detail/Detail";
 import Error404 from "./components/Erros404/Erros404";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Work from "./components/work/Work";
+import Client from "./components/client/Client";
 function App() {
   return (
     <>
@@ -27,6 +28,7 @@ function App() {
                 <Route exact path="/warehouse" element={<Warehouse />} />
                 <Route exact path="/detailList/:id" element={<Detail/>} />
                 <Route exact path="/work" element={<Work />} />
+                <Route exact path="/client" element={<Client />} />
                 <Route path="/*" element={<Error404 />}></Route>
               </Routes>
             </section>

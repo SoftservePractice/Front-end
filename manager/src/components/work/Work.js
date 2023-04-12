@@ -158,7 +158,7 @@ function EditData(item){
         Add Data
       </button>
       </div>
-      {!data ? ( <span className='table__no-connect'>No warehouse found</span> ) :
+      {!data ? ( <span className='table__no-connect'>No work found</span> ) :
         <div className='content__block-main'>
           <table className='table'>
               <tr>

@@ -8,6 +8,7 @@ function Navbar() {
       <li className="line__item">< NavLink  className="line__link-item" to='/detailList'>DetailList</ NavLink ></li>
       <li className="line__item"><NavLink className="line__link-item" to='/warehouse'>Warehouse</NavLink></li>
       <li className="line__item"><NavLink className="line__link-item" to='/work'>Work</NavLink></li>
+      <li className="line__item"><NavLink className="line__link-item" to='/client'>Client</NavLink></li>
     </nav>
   );
 }
