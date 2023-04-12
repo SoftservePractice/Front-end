@@ -2,132 +2,147 @@ import {useState, useEffect, useRef} from 'react';
 import {getAllData, addData, removeData, updateData} from '../../modules/requests';
 
 
-
 function Category(){
-  const [data, setData] = useState([]);
-  const [editData, setEditData] = useState({name: '', parentCategory: null});
-  const [category, setCategory] = useState({});
-  const [modalVisible, setModalVisible] = useState(false);
-  const [searchName, setSearchName] = useState('');
-  const isMountedRef = useRef(false);
-
-  useEffect(() => {
-      if (isMountedRef.current) {
-          return;
-      }
-      GetAllData();
-      isMountedRef.current = true;
-  }, [])
-
-  //ПОЛУЧЕНИЕ ВСЕХ КАТЕГОРИЙ
-  async function GetAllData(){
-      const result = await getAllData("http://localhost:7083/category");
-      setData(result);
-  }
-  //ПОЛУЧЕНИЕ КАТЕГОРИИ ПО ID
-  async function GetById(id){
-      
-          await fetch(`/category/${id}`,
-          {
-              method: "GET",
-              headers: {
-                  'Content-Type': 'application/json'
-                },
-          })
-          .then((res) => res.json())
-          .then((data) => setCategory(data))
-          .catch ((error)=> {
-              console.error(error)});
-  }
-  //ПОЛУЧЕНИЕ НАЗВАНИЯ РОДИТЕЛЬСКОЙ КАТЕГОРИИ
-  function GetCategoryNameById(id){
-      const index = data.findIndex(item => item.id === Number(id));
-      return data[index] ? data[index].name : undefined;
-  }
-  //ФИЛЬТР КАТЕГОРИЙ ПО РОДИТЕЛЬСКОМУ ID
-  async function GetByParentId(id){
-      
-          await fetch(`/category?parentId=${id}`,
-          {
-              method: "GET",
-              headers: {
-                  'Content-Type': 'application/json'
-                },
-          })
-          .then((res) => res.json())
-          .then((data) => setData(data))
-          .catch ((error)=> {
-              console.error(error)});
-  }
-  //ДОБАВЛЕНИЕ
-  async function AddData(){
-      const {name, parentCategory} = editData;
-      if(name.length > 0 && parentCategory >= 0){
-          const result = await addData("http://localhost:7083/category/create", {
-              name: name, 
-              parentCategory: parentCategory ? Number(parentCategory) : null
-          });
-          setData([...data, result])
-          setModalVisible(false);
-          setEditData({ name: '', parentCategory: null });
-      }
-      else{
-          Cancel();
-      }
-  }
-  //УДАЛЕНИЕ
-  async function RemoveData(id){
-      const result = await removeData(`http://localhost:7083/category/delete/${id}`);
-      if(result){
-          setData(removeChildren(data, id));
-      }
-  }
-  const removeChildren = (data, parentId) => {
-      const children = data.filter(item => item.parentCategory === parentId);
-      children.forEach(item => {
-          removeChildren(data, item.id);
+    const [data, setData] = useState([]);
+    const [editData, setEditData] = useState({name: '', parentCategory: undefined});
+    const [category, setCategory] = useState({});
+    const [modalVisible, setModalVisible] = useState(false);
+    const [searchName, setSearchName] = useState('');
+    const isMountedRef = useRef(false);
+    const [validity, setValidity] = useState({
+        name: true,
+        parentCategory: true,
       });
-      const newData = data.filter(item => item.id !== parentId && !children.includes(item));
-      return newData;
-    };
-  //ОБНОВЛЕНИЕ
-  async function UpdateData() {
-      const {id, name, parentCategory} = editData;
-      if(name.length > 0){
-          const result = await updateData("http://localhost:7083/category/update", {
-              id: Number(id),
-              name: name, 
-              parentCategory: parentCategory ? Number(parentCategory) : null
-          });
-          if(result){
-              const newData = [...data];
-              const index = newData.findIndex(item => item.id === Number(id));
-              newData[index] = {id: Number(id), name: name, address: parentCategory};
-              GetAllData();
-          }
-      }
-      else{
-          Cancel();
-      }
-      setModalVisible(false);
-      setEditData({ name: '', parentCategory: null }); 
+
+    useEffect(() => {
+        if (isMountedRef.current) {
+            return;
+        }
+        GetAllData();
+        isMountedRef.current = true;
+    }, [])
+
+    //ПОЛУЧЕНИЕ ВСЕХ КАТЕГОРИЙ
+    async function GetAllData(){
+        const result = await getAllData("/category");
+        setData(result);
     }
-    function EditData(item){
-      setEditData(item); 
-      setModalVisible(true);
-  }
-  function Cancel(){
-      setModalVisible(false);
-      setEditData({ name: '', parentCategory: null }); 
-  }
+    //ПОЛУЧЕНИЕ КАТЕГОРИИ ПО ID
+    async function GetById(id){
+        
+            await fetch(`/category/${id}`,
+            {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+            })
+            .then((res) => res.json())
+            .then((data) => setCategory(data))
+            .catch ((error)=> {
+                console.error(error)});
+    }
+    //ПОЛУЧЕНИЕ НАЗВАНИЯ РОДИТЕЛЬСКОЙ КАТЕГОРИИ
+    function GetCategoryNameById(id){
+        const index = data.findIndex(item => item.id === Number(id));
+        return data[index] ? data[index].name : undefined;
+    }
+    //ФИЛЬТР КАТЕГОРИЙ ПО РОДИТЕЛЬСКОМУ ID
+    async function GetByParentId(id){
+        
+            await fetch(`http://localhost:5000/category?parentId=${id}`,
+            {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+            })
+            .then((res) => res.json())
+            .then((data) => setData(data))
+            .catch ((error)=> {
+                console.error(error)});
+    }
+    //ДОБАВЛЕНИЕ
+    async function AddData(){
+        setValidity({name: true, parentCategory: true});
+        if(validate()){
+            const {name, parentCategory} = editData;
+            const result = await addData("http://localhost:5000/category/create", {
+                name: name, 
+                parentCategory: parentCategory ? Number(parentCategory) : null
+            });
+            setData([...data, result])
+            setModalVisible(false);
+            setEditData({ name: '', parentCategory: undefined });
+        }
+    }
+    //УДАЛЕНИЕ
+    async function RemoveData(id){
+        const result = await removeData(`http://localhost:5000/category/delete/${id}`);
+        if(result){
+            setData(removeChildren(data, id));
+        }
+    }
+    const removeChildren = (data, parentId) => {
+        const children = data.filter(item => item.parentCategory === parentId);
+        children.forEach(item => {
+            removeChildren(data, item.id);
+        });
+        const newData = data.filter(item => item.id !== parentId && !children.includes(item));
+        return newData;
+      };
+    //ОБНОВЛЕНИЕ
+    async function UpdateData() {
+        setValidity({name: true, parentCategory: true});
+        if(validate()){
+            const {id, name, parentCategory} = editData;
+            const result = await updateData("http://localhost:5000/category/update", {
+                id: Number(id),
+                name: name, 
+                parentCategory: parentCategory ? Number(parentCategory) : null
+            });
+            if(result){
+                const newData = [...data];
+                const index = newData.findIndex(item => item.id === Number(id));
+                newData[index] = {id: Number(id), name: name, address: parentCategory};
+                GetAllData();
+            }
+            setModalVisible(false);
+            setEditData({ name: '', parentCategory: undefined }); 
+        }
+      }
+      function EditData(item){
+        setEditData(item); 
+        setModalVisible(true);
+        setValidity({name: true, parentCategory: true});    
+    }
+    function Cancel(){
+        setModalVisible(false);
+        setEditData({ name: '', parentCategory: null }); 
+    }
+    function validate() {
+        let isValid = true;
+        if (!editData.name) {
+          isValid = false;
+          setValidity((prevValidity) => ({ ...prevValidity, name: false }));
+        }
+        if(!editData.parentCategory){
+            setValidity((prevValidity) => ({ ...prevValidity, parentCategory: true }));
+        }
+        else if (editData.parentCategory < 1 || !data.some(item => item.id == editData.parentCategory)) {
+          isValid = false;
+          setValidity((prevValidity) => ({ ...prevValidity, parentCategory: false }));
+        }
+        return isValid;
+      }
   return (
       <div className='content'>
           {modalVisible && (
           <div className='content__modal'>
               <div className='content__block-modal'>
                   <button className='content__cancel-btn-modal' onClick={Cancel}>X</button>
-                  <input className='main-input' placeholder='Name...' value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })}></input>
-                  <input className='main-input' type={'number'} placeholder='Parent Category ID...' value={editData.parentCategory} onChange={(e) => setEditData({ ...editData, parentCategory: e.target.value })}></input>
+                  <input className={!validity.name ? "main-input-invalid": "main-input"} placeholder='Name...' value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })}></input>
+                  <input className={!validity.name ? "main-input-invalid": "main-input"} type={'number'} placeholder='Parent Category ID...' value={editData.parentCategory} onChange={(e) => setEditData({ ...editData, parentCategory: e.target.value })}></input>
                   {!editData.id ? 
                   <button className='content__add-btn-modal main-btn' onClick={AddData}>Add</button> :
                   <button className='content__update-btn-modal main-btn' onClick={UpdateData}>Update</button>
