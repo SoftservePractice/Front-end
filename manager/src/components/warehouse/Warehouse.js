@@ -5,14 +5,14 @@ import styles from "../../App.css";
 
 function Warehouse() {
   const [data, setData] = useState([]);
-  const [editData, setEditData] = useState({ name: "", address: "" });
+  const [editData, setEditData] = useState({name: '', address: ''});
   const [modalVisible, setModalVisible] = useState(false);
-  const [filterName, setFilterName] = useState("");
-  const isMountedRef = useRef(false);
+  const [filterName, setFilterName] = useState('');
+  const isMountedRef = useRef(false); 
   const [validity, setValidity] = useState({
-    name: true,
-    address: true,
-  });
+      name: true,
+      address: true,
+    });
 
   useEffect(() => {
     if (isMountedRef.current) {
@@ -43,18 +43,18 @@ function Warehouse() {
   }
   //ДОБАВЛЕНИЕ
   async function AddNewData() {
-    setValidity({ name: true, address: true });
-    if (validate()) {
-      const { name, address } = editData;
-      const result = await addData("http://egorhi-001-site1.htempurl.com/warehouse/create", { name, address });
-      setData([...data, result]);
-      setModalVisible(false);
-      setEditData({ name: "", address: "" });
+    setValidity({name: true, address: true});
+    if(validate()){
+        const { name, address } = editData;
+        const result = await addData(`http://egorhi-001-site1.htempurl.com/warehouse?name=${name}&adress=${address}`);
+        setData([...data, result])
+        setModalVisible(false);
+        setEditData({ name: '', address: '' });
     }
   }
   //УДАЛЕНИЕ
   async function RemoveData(id) {
-    const result = await removeData(`http://egorhi-001-site1.htempurl.com/warehouse/delete/${id}`);
+    const result = await removeData(`http://egorhi-001-site1.htempurl.com/warehouse/${id}`);
     if (result) {
       const newData = data.filter((item) => item.id !== id);
       setData(newData);
@@ -62,35 +62,31 @@ function Warehouse() {
   }
   //ОБНОВЛЕНИЕ
   async function UpdateData() {
-    setValidity({ name: true, address: true });
-    if (validate()) {
-      const { id, name, address } = editData;
-      const result = await updateData("http://egorhi-001-site1.htempurl.com/warehouse/update", {
-        id: Number(id),
-        name,
-        address,
-      });
-      if (result) {
-        const newData = [...data];
-        const index = newData.findIndex((item) => item.id === id);
-        newData[index] = { ...editData };
-        console.log(newData[index]);
-        setData(newData);
-      }
-      setModalVisible(false);
-      setEditData({ name: "", address: "" });
-    }
+        setValidity({name: true, address: true});
+        if(validate()){
+            const {id, name, address} = editData;
+            const result = await updateData(`http://egorhi-001-site1.htempurl.com/warehouse/${id}?name=${name}&adress=${address}`);
+            if(result){
+                const newData = [...data];
+                const index = newData.findIndex(item => item.id === id);
+                newData[index] = { ...editData};
+                console.log(newData[index])
+                setData(newData);
+            }
+            setModalVisible(false);
+            setEditData({ name: '', address: '' });
+        }
   }
-  function EditData(item) {
+  function EditData(item){
     setEditData(item);
     setModalVisible(true);
-    setValidity({ name: true, address: true });
-  }
-  function Cancel() {
+    setValidity({name: true, address: true})
+}
+function Cancel(){
     setModalVisible(false);
-    setEditData({ name: "", address: "" });
-  }
-  function validate() {
+    setEditData({ name: '', address: '' });
+}
+function validate() {
     let isValid = true;
     if (!editData.name) {
       isValid = false;
@@ -167,7 +163,7 @@ function Warehouse() {
             )
             .map((item) => {
               return (
-                <tr>
+                <tr key={item.id}>
                  <th>{item.id}</th>
                  <th>{item.name}</th>
                  <th>{item.address}</th>
