@@ -2,10 +2,6 @@ async function getAllData(url) {
     try {
       const response = await fetch(url, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        mode: 'cors'
       });
       const data = await response.json();
       return data;
@@ -20,10 +16,6 @@ async function addData(url, object){
         const response = await fetch(url,
             {
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(object)
             });
         const data = await response.json();
         return data;
@@ -38,9 +30,6 @@ async function removeData(url){
         const response = await fetch(url,
             {
                 method: "DELETE",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
             });
         const result = await response.json();
         return result;
@@ -50,15 +39,11 @@ async function removeData(url){
     } 
 }
 //ОБНОВЛЕНИЕ
-async function updateData(url, object) {
+async function updateData(url) {
     try {
         const response = await fetch(url,
             {
                 method: "PATCH",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(object)
             });
         const result = await response.json();
         return result;

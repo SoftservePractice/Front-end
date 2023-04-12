@@ -4,7 +4,7 @@ import {getAllData, addData, removeData, updateData} from '../../modules/request
 
 function Category(){
     const [data, setData] = useState([]);
-    const [editData, setEditData] = useState({name: '', parentCategory: undefined});
+    const [editData, setEditData] = useState({name: '', parentCategory: 0});
     const [category, setCategory] = useState({});
     const [modalVisible, setModalVisible] = useState(false);
     const [searchName, setSearchName] = useState('');
@@ -68,10 +68,7 @@ function Category(){
      if(validate()){
          const {name, parentCategory} = editData;
          let tmp = parentCategory ? Number(parentCategory) : null;
-         const result = await addData(`http://egorhi-001-site1.htempurl.com/Category/create`,{
-            name: name, 
-            parentCategory: parentCategory ? Number(parentCategory) : null
-        });
+         const result = await addData(`http://egorhi-001-site1.htempurl.com/category?name=${name}&parentCategory=${tmp}`);
          console.log(result)
          setData([...data, result])
          setModalVisible(false);
@@ -80,7 +77,8 @@ function Category(){
 }
 //УДАЛЕНИЕ
 async function RemoveData(id){
-    const result = await removeData(`http://egorhi-001-site1.htempurl.com/category/delete/${id}`);
+    const result = await removeData(`http://egorhi-001-site1.htempurl.com/category/${id}`);
+    console.log(result)
     if(result){
         setData(removeChildren(data, id));
     }
@@ -98,11 +96,7 @@ async function UpdateData() {
     setValidity({name: true, parentCategory: true});
     if(validate()){
         const {id, name, parentCategory} = editData;
-        const result = await updateData("http://egorhi-001-site1.htempurl.com/category/update", {
-            id: Number(id),
-            name: name, 
-            parentCategory: parentCategory ? Number(parentCategory) : null
-        });
+        const result = await updateData(`http://egorhi-001-site1.htempurl.com/category/${id}?name=${name}&parentCategory=${parentCategory}`);
         if(result){
             const newData = [...data];
             const index = newData.findIndex(item => item.id === Number(id));
