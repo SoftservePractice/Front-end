@@ -20,8 +20,8 @@ function DetailList(){
         isMountedRef.current = true;
     }, [])
 
-    //ПОЛУЧЕНИЕ ВСЕХ СПИСКОВ
-    async function GetAllData(){
+     //ПОЛУЧЕНИЕ ВСЕХ СПИСКОВ
+     async function GetAllData(){
         const result = await getAllData("http://egorhi-001-site1.htempurl.com/detailList");
         console.log(result)
         setData(result);
@@ -88,16 +88,15 @@ function DetailList(){
         }
         return isValid;
       }
-
     return(
         <div className='content'>
             {modalVisible && (
             <div className='content__modal'>
                 <div className='content__block-modal'>
                     <button className='content__cancel-btn-modal' onClick={Cancel}>X</button>
-                    <input className='main-input' type={'number'} placeholder='Warehouse ID...' value={editData.warehouseId} onChange={(e) => setEditData({...editData, warehouseId: e.target.value})}></input>
-                    <input className='main-input' type={'number'} placeholder='Detail Id...' value={editData.detailId} onChange={(e) => setEditData({...editData, detailId: e.target.value})}></input>
-                    <input className='main-input' type={'number'} placeholder='Count...' value={editData.count} onChange={(e) => setEditData({...editData, count: e.target.value})}></input>
+                    <input className={!validity.warehouseId ? "main-input-invalid": "main-input"} type={'number'} placeholder='Warehouse ID...' value={editData.warehouseId} onChange={(e) => setEditData({...editData, warehouseId: e.target.value})}></input>
+                    <input className={!validity.detailId ? "main-input-invalid": "main-input"} type={'number'} placeholder='Detail Id...' value={editData.detailId} onChange={(e) => setEditData({...editData, detailId: e.target.value})}></input>
+                    <input className={!validity.count ? "main-input-invalid": "main-input"} type={'number'} placeholder='Count...' value={editData.count}  onChange={(e) => setEditData({...editData, count: e.target.value})}></input>
                     {!editData.id ? 
                     <button className='content__add-btn-modal main-btn' onClick={AddData}>Add</button> :
                     <button className='content__update-btn-modal main-btn' onClick={UpdateData}>Update</button>
@@ -107,7 +106,10 @@ function DetailList(){
             </div>
             )}
 
-            <button className='content__btn-add main-btn' onClick={() => setModalVisible(true)}>Add Data</button>
+            <button className='content__btn-add main-btn' onClick={() => {
+                setModalVisible(true);
+                setValidity({warehouseId: true, detailId: true, count: true})
+                }}>Add Data</button>
             {!data ? (<span className='table__no-connect'>No category found</span>) : 
                <div className='content__block-main'>
                   <table className='table'>
@@ -122,7 +124,7 @@ function DetailList(){
                     {!data ? (<span style={{fontSize: "2rem", margin:"5%"}}>No detail found</span>) : 
                       data.map((item) => {
                         return (
-                          <tr>
+                          <tr key={item.id}>
                              <th>{item.id}</th>
                               <th>{item.warehouseId}</th>
                               <th>{item.detailId}</th>

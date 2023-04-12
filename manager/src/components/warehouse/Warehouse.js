@@ -5,14 +5,14 @@ import styles from "../../App.css";
 
 function Warehouse() {
   const [data, setData] = useState([]);
-  const [editData, setEditData] = useState({name: '', address: ''});
+  const [editData, setEditData] = useState({ name: "", address: "" });
   const [modalVisible, setModalVisible] = useState(false);
-  const [filterName, setFilterName] = useState('');
-  const isMountedRef = useRef(false); 
+  const [filterName, setFilterName] = useState("");
+  const isMountedRef = useRef(false);
   const [validity, setValidity] = useState({
-      name: true,
-      address: true,
-    });
+    name: true,
+    address: true,
+  });
 
   useEffect(() => {
     if (isMountedRef.current) {
@@ -26,20 +26,6 @@ function Warehouse() {
   async function GetData() {
     const result = await getAllData("http://egorhi-001-site1.htempurl.com/warehouse");
     setData(result);
-  }
-  //ПОЛУЧЕНИЕ СКЛАДА ПО ID
-  async function GetById(id) {
-    await fetch(`/warehouse/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((error) => {
-        console.error(error);
-      });
   }
   //ДОБАВЛЕНИЕ
   async function AddNewData() {
@@ -62,42 +48,42 @@ function Warehouse() {
   }
   //ОБНОВЛЕНИЕ
   async function UpdateData() {
-        setValidity({name: true, address: true});
-        if(validate()){
-            const {id, name, address} = editData;
-            const result = await updateData(`http://egorhi-001-site1.htempurl.com/warehouse/${id}?name=${name}&adress=${address}`);
-            if(result){
-                const newData = [...data];
-                const index = newData.findIndex(item => item.id === id);
-                newData[index] = { ...editData};
-                console.log(newData[index])
-                setData(newData);
-            }
-            setModalVisible(false);
-            setEditData({ name: '', address: '' });
+    setValidity({name: true, address: true});
+    if(validate()){
+        const {id, name, address} = editData;
+        const result = await updateData(`http://egorhi-001-site1.htempurl.com/warehouse/${id}?name=${name}&adress=${address}`);
+        if(result){
+            const newData = [...data];
+            const index = newData.findIndex(item => item.id === id);
+            newData[index] = { ...editData};
+            console.log(newData[index])
+            setData(newData);
         }
-  }
-  function EditData(item){
-    setEditData(item);
-    setModalVisible(true);
-    setValidity({name: true, address: true})
+        setModalVisible(false);
+        setEditData({ name: '', address: '' });
+    }
+}
+function EditData(item){
+  setEditData(item);
+  setModalVisible(true);
+  setValidity({name: true, address: true})
 }
 function Cancel(){
-    setModalVisible(false);
-    setEditData({ name: '', address: '' });
+  setModalVisible(false);
+  setEditData({ name: '', address: '' });
 }
 function validate() {
-    let isValid = true;
-    if (!editData.name) {
-      isValid = false;
-      setValidity((prevValidity) => ({ ...prevValidity, name: false }));
-    }
-    if (!editData.address) {
-      isValid = false;
-      setValidity((prevValidity) => ({ ...prevValidity, address: false }));
-    }
-    return isValid;
+  let isValid = true;
+  if (!editData.name) {
+    isValid = false;
+    setValidity((prevValidity) => ({ ...prevValidity, name: false }));
   }
+  if (!editData.address) {
+    isValid = false;
+    setValidity((prevValidity) => ({ ...prevValidity, address: false }));
+  }
+  return isValid;
+}
   return (
     <div className='content'>
       {modalVisible && (
@@ -146,7 +132,7 @@ function validate() {
         Add Data
       </button>
       </div>
-      {!data ? ( <span className='table__no-connect'>No category found</span> ) :
+      {!data ? ( <span className='table__no-connect'>No warehouse found</span> ) :
         <div className='content__block-main'>
           <table className='table'>
               <tr>
