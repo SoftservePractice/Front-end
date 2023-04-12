@@ -20,47 +20,38 @@ function DetailList(){
         isMountedRef.current = true;
     }, [])
 
-    //ПОЛУЧЕНИЕ ВСЕХ СПИСКОВ
-    async function GetAllData(){
-        const result = await getAllData("http://localhost:5000/detailList");
+     //ПОЛУЧЕНИЕ ВСЕХ СПИСКОВ
+     async function GetAllData(){
+        const result = await getAllData("http://egorhi-001-site1.htempurl.com/detailList");
+        console.log(result)
         setData(result);
-    }
+    }   
     //ДОБАВЛЕНИЕ
     async function AddData(){
         setValidity({warehouseId: true, detailId: true, count: true})
         if(validate()){
             const {warehouseId, detailId, count} = editData;
-            const result = await addData("http://localhost:5000/detailList/create", {
-                warehouseId: Number(warehouseId),
-                detailId: Number(detailId),
-                count: Number(count)
-                });
+            const result = await addData(`http://egorhi-001-site1.htempurl.com/detailList?warehouseId=${warehouseId}&detailId=${detailId}&count=${count}`);
             setData([...data, result]);
             setModalVisible(false);
             setEditData({warehouseId: 0, detailId: 0, count: 0});
             setValidity({warehouseId: true, detailId: true, count: true})
         }
-        
     };
     //УДАЛЕНИЕ
     async function RemoveData(id){
-        const result = await removeData(`http://localhost:5000/detailList/delete/${id}`);
+        const result = await removeData(`http://egorhi-001-site1.htempurl.com/detailList/${id}`);
         if(result){
             const newData = data.filter(item => item.id !== id);
             setData(newData);
         }
-    }
+    }    
      //ОБНОВЛЕНИЕ
      async function UpdateData() {
         setValidity({warehouseId: true, detailId: true, count: true})
         if(validate()){
             const {id, warehouseId, detailId, count} = editData;
-            const result = await updateData("http://localhost:5000/detailList/update", {
-                id: Number(id),
-                warehouseId: Number(warehouseId),
-                detailId: Number(detailId),
-                count: Number(count)
-                });
+            const result = await updateData(`http://egorhi-001-site1.htempurl.com/detailList/${id}?warehouseId=${warehouseId}&detailId=${detailId}&count=${count}`);
                 if(result){
                     const newData = [...data];
                     const index = newData.findIndex(item => item.id === Number(id));
@@ -69,9 +60,9 @@ function DetailList(){
                 }
             setModalVisible(false);
             setEditData({warehouseId: 0, detailId: 0, count: 0});
-        }    
+        }       
       }
-      function EditData(item){
+    function EditData(item){
         setModalVisible(true);
         setEditData(item);
         setValidity({warehouseId: true, detailId: true, count: true})
@@ -103,9 +94,9 @@ function DetailList(){
             <div className='content__modal'>
                 <div className='content__block-modal'>
                     <button className='content__cancel-btn-modal' onClick={Cancel}>X</button>
-                    <input className={!validity.name ? "main-input-invalid": "main-input"} type={'number'} placeholder='Warehouse ID...' value={editData.warehouseId} onChange={(e) => setEditData({...editData, warehouseId: e.target.value})}></input>
-                    <input className={!validity.name ? "main-input-invalid": "main-input"} type={'number'} placeholder='Detail Id...' value={editData.detailId} onChange={(e) => setEditData({...editData, detailId: e.target.value})}></input>
-                    <input className={!validity.name ? "main-input-invalid": "main-input"} type={'number'} placeholder='Count...' value={editData.count}  onChange={(e) => setEditData({...editData, count: e.target.value})}></input>
+                    <input className={!validity.warehouseId ? "main-input-invalid": "main-input"} type={'number'} placeholder='Warehouse ID...' value={editData.warehouseId} onChange={(e) => setEditData({...editData, warehouseId: e.target.value})}></input>
+                    <input className={!validity.detailId ? "main-input-invalid": "main-input"} type={'number'} placeholder='Detail Id...' value={editData.detailId} onChange={(e) => setEditData({...editData, detailId: e.target.value})}></input>
+                    <input className={!validity.count ? "main-input-invalid": "main-input"} type={'number'} placeholder='Count...' value={editData.count}  onChange={(e) => setEditData({...editData, count: e.target.value})}></input>
                     {!editData.id ? 
                     <button className='content__add-btn-modal main-btn' onClick={AddData}>Add</button> :
                     <button className='content__update-btn-modal main-btn' onClick={UpdateData}>Update</button>
@@ -115,7 +106,10 @@ function DetailList(){
             </div>
             )}
 
-            <button className='content__btn-add main-btn' onClick={() => setModalVisible(true)}>Add Data</button>
+            <button className='content__btn-add main-btn' onClick={() => {
+                setModalVisible(true);
+                setValidity({warehouseId: true, detailId: true, count: true})
+                }}>Add Data</button>
             {!data ? (<span className='table__no-connect'>No category found</span>) : 
                <div className='content__block-main'>
                   <table className='table'>
