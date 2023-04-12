@@ -24,7 +24,6 @@ function Client(){
       //ПОЛУЧЕНИЕ
       async function GetData() {
         const result = await getAllData("http://egorhi-001-site1.htempurl.com/client");
-        console.log(result)
         setData(result);
       }
       //ДОБАВЛЕНИЕ
@@ -62,7 +61,6 @@ function Client(){
             const newData = [...data];
             const index = newData.findIndex(item => item.id === id);
             newData[index] = { ...editData};
-            console.log(newData[index])
             setData(newData);
         }
         setModalVisible(false);

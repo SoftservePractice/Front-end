@@ -32,7 +32,7 @@ function Work(){
         if(validate()){
             const { detail, detailPrice, workPrice, order } = editData;
             const result = await addData(`http://egorhi-001-site1.htempurl.com/work?detail=${detail}&detailPrice=${detailPrice}&order=${order}&workPrice=${workPrice}`);
-            setData([...data, result])
+            setData([...data, result.newWork])
             setModalVisible(false);
             setEditData({ detail: 0, detailPrice: 0, workPrice: 0, order: 0 });
         }
@@ -55,7 +55,6 @@ function Work(){
             const newData = [...data];
             const index = newData.findIndex(item => item.id === id);
             newData[index] = { ...editData};
-            console.log(newData[index])
             setData(newData);
         }
         setModalVisible(false);
