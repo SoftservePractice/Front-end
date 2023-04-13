@@ -24,6 +24,7 @@ function Work(){
       //ПОЛУЧЕНИЕ
       async function GetData() {
         const result = await getAllData("http://egorhi-001-site1.htempurl.com/work");
+        console.log(result)
         setData(result);
       }
       //ДОБАВЛЕНИЕ
