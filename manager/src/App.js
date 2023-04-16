@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Work from "./components/work/Work";
 import Client from "./components/client/Client";
 import Order from "./components/order/Order";
+import Car from "./components/car/Car";
 function App() {
   return (
     <>
@@ -21,16 +22,16 @@ function App() {
               <Navbar />
             </div>
             <section className="main">
-              
               <Routes>
                 <Route exact path="/" element={<Main />} />
                 <Route exact path="/category" element={<Category />} />
                 <Route exact path="/detailList" element={<DetailList />} />
                 <Route exact path="/warehouse" element={<Warehouse />} />
-                <Route exact path="/detailList/:id" element={<Detail/>} />
+                <Route exact path="/detailList/:id" element={<Detail />} />
                 <Route exact path="/work" element={<Work />} />
                 <Route exact path="/client" element={<Client />} />
                 <Route exact path="/order" element={<Order />} />
+                <Route exact path="/car" element={<Car />} />
                 <Route path="/*" element={<Error404 />}></Route>
               </Routes>
             </section>
