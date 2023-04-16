@@ -12,6 +12,8 @@ function Navbar() {
       <li className="line__item"><NavLink className="line__link-item" to='/order'>Order</NavLink></li>
       <li className="line__item"><NavLink className="line__link-item" to='/detail'>Detail</NavLink></li>
       <li className="line__item"><NavLink className="line__link-item" to='/car'>Car</NavLink></li>
+      <li className="line__item"><NavLink className="line__link-item" to='/worklist'>WorkList</NavLink></li>
+
     </nav>
   );
 }

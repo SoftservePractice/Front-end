@@ -10,7 +10,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Work from "./components/work/Work";
 import Client from "./components/client/Client";
 import Order from "./components/order/Order";
+import WorkList from "./components/workList/WorkList";
 import Car from "./components/car/Car";
+
 function App() {
   return (
     <>
@@ -32,6 +34,7 @@ function App() {
                 <Route exact path="/client" element={<Client />} />
                 <Route exact path="/order" element={<Order />} />
                 <Route exact path="/car" element={<Car />} />
+                <Route exact path="/worklist" element={<WorkList />} />
                 <Route path="/*" element={<Error404 />}></Route>
               </Routes>
             </section>
