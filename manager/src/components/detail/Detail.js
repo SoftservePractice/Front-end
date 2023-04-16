@@ -145,11 +145,11 @@ function validate() {
           
                 <div className='block__card' key={data.id}>
                   <div className='block__info'>
-                    <p className='block__field'>{data.model}</p>
+                    <p className='block__field'>Model:{data.model}</p>
                       <p className='block__field'>
                         Vendor code: {data.vendorCode}
                       </p>
-                      <p className='block__field'>{data.description}</p>
+                      <p className='block__field'>Description: {data.description}</p>
                       <p className='block__field'>
                         Compatible Vehicles: {data.compatibleVehicles}
                       </p>
