@@ -3,6 +3,7 @@ import {getAllData, addData, removeData, updateData} from '../../modules/request
 
 
 function Category(){
+    const link = process.env.REACT_APP_MY_LINK;
     const [data, setData] = useState([]);
     const [editData, setEditData] = useState({name: '', parentCategory: 0});
     const [modalVisible, setModalVisible] = useState(false);
@@ -23,7 +24,7 @@ function Category(){
 
     //ПОЛУЧЕНИЕ ВСЕХ КАТЕГОРИЙ
     async function GetAllData(){
-        const result = await getAllData("http://egorhi-001-site1.htempurl.com/category");
+        const result = await getAllData(`${link}/category`);
         setData(result);
     }
     //ПОЛУЧЕНИЕ НАЗВАНИЯ РОДИТЕЛЬСКОЙ КАТЕГОРИИ
@@ -37,7 +38,7 @@ function Category(){
     if(validate()){
         const {name, parentCategory} = editData;
         let value = parentCategory ? parentCategory : '';
-        const result = await addData(`http://egorhi-001-site1.htempurl.com/category?name=${name}&parentCategory=${value}`);
+        const result = await addData(`${link}/category?name=${name}&parentCategory=${value}`);
         console.log(result)
         setData([...data, result])
         setModalVisible(false);
@@ -46,7 +47,7 @@ function Category(){
 }
 //УДАЛЕНИЕ
 async function RemoveData(id){
-   const result = await removeData(`http://egorhi-001-site1.htempurl.com/category/${id}`);
+   const result = await removeData(`${link}/category/${id}`);
    console.log(result)
    if(result){
        setData(removeChildren(data, id));

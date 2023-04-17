@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { getAllData, addData, removeData, updateData} from '../../modules/requests';
 
-import styles from "../../App.css";
-
 function Warehouse() {
+  const link = process.env.REACT_APP_MY_LINK;
   const [data, setData] = useState([]);
   const [editData, setEditData] = useState({ name: "", address: "" });
   const [modalVisible, setModalVisible] = useState(false);
@@ -24,7 +23,7 @@ function Warehouse() {
 
   //ПОЛУЧЕНИЕ ВСЕХ СКЛАДОВ
   async function GetData() {
-    const result = await getAllData("http://egorhi-001-site1.htempurl.com/warehouse");
+    const result = await getAllData(`${link}/warehouse`);
     setData(result);
   }
   //ДОБАВЛЕНИЕ
@@ -32,7 +31,7 @@ function Warehouse() {
     setValidity({name: true, address: true});
     if(validate()){
         const { name, address } = editData;
-        const result = await addData(`http://egorhi-001-site1.htempurl.com/warehouse?name=${name}&adress=${address}`);
+        const result = await addData(`${link}/warehouse?name=${name}&adress=${address}`);
         setData([...data, result])
         setModalVisible(false);
         setEditData({ name: '', address: '' });
@@ -40,7 +39,7 @@ function Warehouse() {
   }
   //УДАЛЕНИЕ
   async function RemoveData(id) {
-    const result = await removeData(`http://egorhi-001-site1.htempurl.com/warehouse/${id}`);
+    const result = await removeData(`${link}/warehouse/${id}`);
     if (result) {
       const newData = data.filter((item) => item.id !== id);
       setData(newData);
@@ -51,7 +50,7 @@ function Warehouse() {
     setValidity({name: true, address: true});
     if(validate()){
         const {id, name, address} = editData;
-        const result = await updateData(`http://egorhi-001-site1.htempurl.com/warehouse/${id}?name=${name}&adress=${address}`);
+        const result = await updateData(`${link}/warehouse/${id}?name=${name}&adress=${address}`);
         if(result){
             const newData = [...data];
             const index = newData.findIndex(item => item.id === id);

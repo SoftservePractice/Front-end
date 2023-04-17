@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { getAllData, addData, removeData, updateData} from '../../modules/requests';
 
 function Work(){
+    const link = process.env.REACT_APP_MY_LINK;
     const [data, setData] = useState([]);
     const [editData, setEditData] = useState({ detail: 0, detailPrice: 0, workPrice: 0, order: 0 });
     const [modalVisible, setModalVisible] = useState(false);
-    const [filterName, setFilterName] = useState("");
     const isMountedRef = useRef(false);
     const [validity, setValidity] = useState({
         detail: true, 
@@ -23,7 +23,7 @@ function Work(){
     
       //ПОЛУЧЕНИЕ
       async function GetData() {
-        const result = await getAllData("http://egorhi-001-site1.htempurl.com/work");
+        const result = await getAllData(`${link}/work`);
         console.log(result)
         setData(result);
       }
@@ -32,7 +32,7 @@ function Work(){
         setValidity({detail: true, detailPrice: true, workPrice: true, order: true});
         if(validate()){
             const { detail, detailPrice, workPrice, order } = editData;
-            const result = await addData(`http://egorhi-001-site1.htempurl.com/work?detail=${detail}&detailPrice=${detailPrice}&order=${order}&workPrice=${workPrice}`);
+            const result = await addData(`${link}/work?detail=${detail}&detailPrice=${detailPrice}&order=${order}&workPrice=${workPrice}`);
             setData([...data, result.newWork])
             setModalVisible(false);
             setEditData({ detail: 0, detailPrice: 0, workPrice: 0, order: 0 });
@@ -40,7 +40,7 @@ function Work(){
     }
     //УДАЛЕНИЕ
     async function RemoveData(id) {
-        const result = await removeData(`http://egorhi-001-site1.htempurl.com/work/${id}`);
+        const result = await removeData(`${link}/work/${id}`);
         if (result) {
         const newData = data.filter((item) => item.id !== id);
         setData(newData);
@@ -51,7 +51,7 @@ function Work(){
     setValidity({detail: true, detailPrice: true, workPrice: true, order: true});
     if(validate()){
         const {id, detail, detailPrice, workPrice, order} = editData;
-        const result = await updateData(`http://egorhi-001-site1.htempurl.com/work/${id}?detail=${detail}&detailPrice=${detailPrice}&order=${order}&workPrice=${workPrice}`);
+        const result = await updateData(`${link}/work/${id}?detail=${detail}&detailPrice=${detailPrice}&order=${order}&workPrice=${workPrice}`);
         if(result){
             const newData = [...data];
             const index = newData.findIndex(item => item.id === id);

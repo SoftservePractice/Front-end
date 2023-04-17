@@ -2,6 +2,7 @@ import {useState, useEffect, useRef} from 'react';
 import {getAllData, addData, removeData, updateData} from '../../modules/requests';
 
 function Technician(){
+    const link = process.env.REACT_APP_MY_LINK;
     const [data, setData] = useState([]);
     const [editData, setEditData] = useState({name: '', phone: '', specialization: '', startWork: '',startWorkInCompany: ''});
     const [modalVisible, setModalVisible] = useState(false);
@@ -24,7 +25,7 @@ function Technician(){
 
     //ПОЛУЧЕНИЕ ВСЕХ УСЛУГ
     async function GetAllData(){
-        const result = await getAllData("http://egorhi-001-site1.htempurl.com/technician");
+        const result = await getAllData(`${link}/technician`);
         setData(result);
     }
     //ДОБАВЛЕНИЕ
@@ -32,7 +33,7 @@ function Technician(){
         setValidity({name: true, phone: true, specialization: true, startWork: true, startWorkInCompany: true});
         if(validate()){
             const { name, phone, specialization, startWork, startWorkInCompany } = editData;
-            const result = await addData(`http://egorhi-001-site1.htempurl.com/technician?name=${name}&phone=${phone}&specialization=${specialization}&startWork=${startWork}&startWorkInCompany=${startWorkInCompany}`);
+            const result = await addData(`${link}/technician?name=${name}&phone=${phone}&specialization=${specialization}&startWork=${startWork}&startWorkInCompany=${startWorkInCompany}`);
             setData([...data, result.newTechnician]);
             setModalVisible(false);
             setEditData({name: '', phone: '', specialization: '', startWork: '',startWorkInCompany: ''});
@@ -40,7 +41,7 @@ function Technician(){
     };
     //УДАЛЕНИЕ
     async function RemoveData(id){
-        const result = await removeData(`http://egorhi-001-site1.htempurl.com/technician/${id}`);
+        const result = await removeData(`${link}/technician/${id}`);
         if(result){
             const newData = data.filter(item => item.id !== id);
             setData(newData);
@@ -51,7 +52,7 @@ function Technician(){
         setValidity({name: true, phone: true, specialization: true, startWork: true, startWorkInCompany: true});
         if(validate()){
             const { id, name, phone, specialization, startWork, startWorkInCompany } = editData;
-            const result = await updateData(`http://egorhi-001-site1.htempurl.com/technician/${id}?name=${name}&phone=${phone}&specialization=${specialization}&startWork=${startWork}&startWorkInCompany=${startWorkInCompany}`);
+            const result = await updateData(`${link}/technician/${id}?name=${name}&phone=${phone}&specialization=${specialization}&startWork=${startWork}&startWorkInCompany=${startWorkInCompany}`);
                 if(result){
                     const newData = [...data];
                     const index = newData.findIndex(item => item.id === id);

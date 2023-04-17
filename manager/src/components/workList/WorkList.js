@@ -2,6 +2,7 @@ import {useState, useEffect, useRef} from 'react';
 import {getAllData, addData, removeData, updateData} from '../../modules/requests';
 
 function WorkList(){
+    const link = process.env.REACT_APP_MY_LINK;
     const [data, setData] = useState([]);
     const [editData, setEditData] = useState({name: '', description: '', price: 0, duration: 0});
     const [modalVisible, setModalVisible] = useState(false);
@@ -24,7 +25,7 @@ function WorkList(){
 
     //ПОЛУЧЕНИЕ ВСЕХ УСЛУГ
     async function GetAllData(){
-        const result = await getAllData("http://egorhi-001-site1.htempurl.com/worklist");
+        const result = await getAllData(`${link}/worklist`);
         setData(result);
     }
     //ДОБАВЛЕНИЕ
@@ -32,7 +33,7 @@ function WorkList(){
         setValidity({name: true, description: true, price: true, duration: true});
         if(validate()){
             const {name, description, price, duration} = editData;
-            const result = await addData(`http://egorhi-001-site1.htempurl.com/worklist?name=${name}&description=${description}&price=${price}&duration=${duration}`);
+            const result = await addData(`${link}/worklist?name=${name}&description=${description}&price=${price}&duration=${duration}`);
             setData([...data, result]);
             setModalVisible(false);
             setEditData({name: '', description: '', price: 0, duration: 0});
@@ -40,7 +41,7 @@ function WorkList(){
     };
     //УДАЛЕНИЕ
     async function RemoveData(id){
-        const result = await removeData(`http://egorhi-001-site1.htempurl.com/worklist/${id}`);
+        const result = await removeData(`${link}/worklist/${id}`);
         if(result){
             const newData = data.filter(item => item.id !== id);
             setData(newData);
@@ -51,7 +52,7 @@ function WorkList(){
         setValidity({name: true, description: true, price: true, duration: true});
         if(validate()){
             const {id, name, description, price, duration} = editData;
-            const result = await updateData(`http://egorhi-001-site1.htempurl.com/worklist/${id}?name=${name}&description=${description}&price=${price}&duration=${duration}`, {
+            const result = await updateData(`${link}/worklist/${id}?name=${name}&description=${description}&price=${price}&duration=${duration}`, {
                     id: Number(id),
                     name: name,
                     description: description,

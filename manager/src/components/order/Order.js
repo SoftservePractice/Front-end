@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { getAllData, addData, removeData, updateData} from '../../modules/requests';
 
 function Order(){
+    const link = process.env.REACT_APP_MY_LINK;
     const [data, setData] = useState([]);
     const [editData, setEditData] = useState({ client: 0, technician: 0, start: 0, end: 0, finalPrice: 0, car: 0, carMileage: 0, appointmentTime: 0 });
     const [modalVisible, setModalVisible] = useState(false);
-    const [filterName, setFilterName] = useState("");
     const isMountedRef = useRef(false);
     const [validity, setValidity] = useState({
         client: true, 
@@ -26,7 +26,7 @@ function Order(){
       }, []);
       //ПОЛУЧЕНИЕ
       async function GetData() {
-        const result = await getAllData("http://egorhi-001-site1.htempurl.com/order");
+        const result = await getAllData(`${link}/order`);
         setData(result);
       }
       //ДОБАВЛЕНИЕ
@@ -46,7 +46,7 @@ function Order(){
             end = end ? end : '';
             finalPrice = finalPrice ? finalPrice : '';
             car = car ? car : '';
-            const result = await addData(`http://egorhi-001-site1.htempurl.com/order?clientId=${client}&technician=${technician}&start=${start}&end=${end}&finalPrice=${finalPrice}&car=${car}&carMileage=${carMileage}&appointmentTime=${appointmentTime}`);
+            const result = await addData(`${link}/order?clientId=${client}&technician=${technician}&start=${start}&end=${end}&finalPrice=${finalPrice}&car=${car}&carMileage=${carMileage}&appointmentTime=${appointmentTime}`);
             setData([...data, result])
             setModalVisible(false);
             setEditData({ client: 0, technician: 0, start: 0, end: 0, finalPrice: 0, car: 0, carMileage: 0, appointmentTime: 0 });
@@ -54,7 +54,7 @@ function Order(){
     }
     //УДАЛЕНИЕ
     async function RemoveData(id) {
-        const result = await removeData(`http://egorhi-001-site1.htempurl.com/order/${id}`);
+        const result = await removeData(`${link}/order/${id}`);
         if (result) {
         const newData = data.filter((item) => item.id !== id);
         setData(newData);
@@ -77,7 +77,7 @@ function Order(){
             end = end ? end : '';
             finalPrice = finalPrice ? finalPrice : '';
             car = car ? car : '';
-        const result = await updateData(`http://egorhi-001-site1.htempurl.com/order/${id}?client=${client}&technician=${technician}&start=${start}&end=${end}&finalPrice=${finalPrice}&car=${car}&carMileage=${carMileage}&appointmentTime=${appointmentTime}`);
+        const result = await updateData(`${link}/order/${id}?client=${client}&technician=${technician}&start=${start}&end=${end}&finalPrice=${finalPrice}&car=${car}&carMileage=${carMileage}&appointmentTime=${appointmentTime}`);
         if(result){
             const newData = [...data];
             const index = newData.findIndex(item => item.id === id);

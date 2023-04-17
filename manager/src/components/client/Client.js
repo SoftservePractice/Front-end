@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { getAllData, addData, removeData, updateData} from '../../modules/requests';
 
 function Client(){
+    const link = process.env.REACT_APP_MY_LINK;
     const [data, setData] = useState([]);
     const [editData, setEditData] = useState({ name: '', phone: 0, telegramId: 0, email: ''});
     const [modalVisible, setModalVisible] = useState(false);
-    const [filterName, setFilterName] = useState("");
     const isMountedRef = useRef(false);
     const [validity, setValidity] = useState({
         name: true, 
@@ -23,7 +23,7 @@ function Client(){
     
       //ПОЛУЧЕНИЕ
       async function GetData() {
-        const result = await getAllData("http://egorhi-001-site1.htempurl.com/client");
+        const result = await getAllData(`${link}/client`);
         setData(result);
       }
       //ДОБАВЛЕНИЕ
@@ -34,7 +34,7 @@ function Client(){
             phone = phone ? phone : '';
             telegramId = telegramId ? telegramId : '';
             email = email ? email : '';
-            const result = await addData(`http://egorhi-001-site1.htempurl.com/client?name=${name}&phone=${phone}&telegramId=${telegramId}&email=${email}`);
+            const result = await addData(`${link}/client?name=${name}&phone=${phone}&telegramId=${telegramId}&email=${email}`);
             setData([...data, result.client])
             setModalVisible(false);
             setEditData({ name: '', phone: 0, telegramId: 0, email: ''});
@@ -42,7 +42,7 @@ function Client(){
     }
     //УДАЛЕНИЕ
     async function RemoveData(id) {
-        const result = await removeData(`http://egorhi-001-site1.htempurl.com/client/${id}`);
+        const result = await removeData(`${link}/client/${id}`);
         if (result) {
         const newData = data.filter((item) => item.id !== id);
         setData(newData);
@@ -56,7 +56,7 @@ function Client(){
         phone = phone ? phone : '';
         telegramId = telegramId ? telegramId : '';
         email = email ? email : '';
-        const result = await updateData(`http://egorhi-001-site1.htempurl.com/client/${id}?name=${name}&phone=${phone}&telegramId=${telegramId}&email=${email}`);
+        const result = await updateData(`${link}/client/${id}?name=${name}&phone=${phone}&telegramId=${telegramId}&email=${email}`);
         if(result){
             const newData = [...data];
             const index = newData.findIndex(item => item.id === id);

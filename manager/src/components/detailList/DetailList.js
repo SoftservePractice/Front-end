@@ -2,6 +2,7 @@ import {useState, useEffect, useRef} from 'react';
 import {getAllData, addData, removeData, updateData} from '../../modules/requests';
 
 function DetailList(){
+    const link = process.env.REACT_APP_MY_LINK;
     const [data, setData] = useState([]);
     const [editData, setEditData] = useState({warehouse: 0, detail: 0, count: 0});
     const [modalVisible, setModalVisible] = useState(false);
@@ -22,7 +23,7 @@ function DetailList(){
 
      //ПОЛУЧЕНИЕ ВСЕХ СПИСКОВ
      async function GetAllData(){
-        const result = await getAllData("http://egorhi-001-site1.htempurl.com/detailList");
+        const result = await getAllData(`${link}/detailList`);
         console.log(result)
         setData(result);
     }   
@@ -31,7 +32,7 @@ function DetailList(){
         setValidity({warehouse: true, detail: true, count: true})
         if(validate()){
             const {warehouse, detail, count} = editData;
-            const result = await addData(`http://egorhi-001-site1.htempurl.com/detailList?warehouseId=${warehouse}&detailId=${detail}&count=${count}`);
+            const result = await addData(`${link}/detailList?warehouseId=${warehouse}&detailId=${detail}&count=${count}`);
             setData([...data, result]);
             setModalVisible(false);
             setEditData({warehouse: 0, detail: 0, count: 0});
@@ -40,7 +41,7 @@ function DetailList(){
     };
     //УДАЛЕНИЕ
     async function RemoveData(id){
-        const result = await removeData(`http://egorhi-001-site1.htempurl.com/detailList/${id}`);
+        const result = await removeData(`${link}/detailList/${id}`);
         if(result){
             const newData = data.filter(item => item.id !== id);
             setData(newData);
@@ -51,7 +52,7 @@ function DetailList(){
         setValidity({warehouse: true, detail: true, count: true})
         if(validate()){
             const {id, warehouse, detail, count} = editData;
-            const result = await updateData(`http://egorhi-001-site1.htempurl.com/detailList/${id}?warehouseId=${warehouse}&detailId=${detail}&count=${count}`);
+            const result = await updateData(`${link}/detailList/${id}?warehouseId=${warehouse}&detailId=${detail}&count=${count}`);
                 if(result){
                     const newData = [...data];
                     const index = newData.findIndex(item => item.id === Number(id));

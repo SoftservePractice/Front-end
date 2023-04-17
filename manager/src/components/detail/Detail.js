@@ -4,7 +4,7 @@ import styles from "../../App.css";
 import {getAllData,addData,removeData,updateData} from "../../modules/requests";
 import './Detail.css';
 function Detail() {
-  const [filterModel, setFilterModel] = useState('');
+    const link = process.env.REACT_APP_MY_LINK;
     const [data, setData] = useState({});
     const [editData, setEditData] = useState({model: '', vendorCode: '', description: '', compatibleVehicles: '', catId: 0});
     const [modalVisible, setModalVisible] = useState(false);
@@ -28,7 +28,7 @@ function Detail() {
 
   //ПОЛУЧЕНИЕ ВСЕХ ДЕТАЛЕЙ
   async function GetAllData() {
-    const result = await getAllData(`http://egorhi-001-site1.htempurl.com/detail/${id}`);
+    const result = await getAllData(`${link}/detail/${id}`);
     setData(result);
   }
   //ДОБАВЛЕНИЕ
@@ -36,7 +36,7 @@ function Detail() {
     setValidity({model: true, vendorCode: true,description: true,compatibleVehicles: true,catId: true})
     if(validate()){
         const {model, vendorCode, description, compatibleVehicles, catId} = editData;
-        const result = await addData(`http://egorhi-001-site1.htempurl.com/detail?model=${model}&vendorCode=${vendorCode}&description=${description}&compatibleVehicles=${compatibleVehicles}$catId=${catId}`);
+        const result = await addData(`${link}/detail?model=${model}&vendorCode=${vendorCode}&description=${description}&compatibleVehicles=${compatibleVehicles}$catId=${catId}`);
         setData([...data, result]);
         setModalVisible(false);
         setEditData({model: '', vendorCode: '', description: '', compatibleVehicles: '', catId: 0});
@@ -45,7 +45,7 @@ function Detail() {
   //УДАЛЕНИЕ
   async function RemoveData(id) {
     const result = await removeData(
-      `http://egorhi-001-site1.htempurl.com/detail/${id}`);
+      `${link}/detail/${id}`);
     if (result) {
       const newData = data.filter((item) => item.id !== id);
       setData(newData);
@@ -56,7 +56,7 @@ function Detail() {
     setValidity({model: true, vendorCode: true,description: true,compatibleVehicles: true,catId: true})
     if(validate()){
         const {id, model, vendorCode, description, compatibleVehicles, catId} = editData;
-        const result = await updateData(`http://egorhi-001-site1.htempurl.com/detail/${id}?model=${model}&vendorCode=${vendorCode}&description=${description}&compatibleVehicles=${compatibleVehicles}$catId=${catId}`);
+        const result = await updateData(`${link}/detail/${id}?model=${model}&vendorCode=${vendorCode}&description=${description}&compatibleVehicles=${compatibleVehicles}$catId=${catId}`);
             if(result){
                 const newData = [...data];
                 const index = newData.findIndex(item => item.id === Number(id));
