@@ -13,6 +13,7 @@ import Order from "./components/order/Order";
 import WorkList from "./components/workList/WorkList";
 import Car from "./components/car/Car";
 import Technician from "./components/technician/Technician";
+import TechnicianPage from "./components/TechnicianPage";
 
 function App() {
   return (
