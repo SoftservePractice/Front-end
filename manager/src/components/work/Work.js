@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { getAllData, addData, removeData, updateData} from '../../modules/requests';
-import { WorkContext } from "../../modules/context";
 
 function Work(){
     const link = process.env.REACT_APP_MY_LINK;
@@ -93,7 +92,6 @@ function EditData(item){
     return isValid;
   }
   return (
-    <WorkContext.Provider value={data}>
     <div className='content'>
       {modalVisible && (
         <div className='content__modal'>
@@ -192,7 +190,6 @@ function EditData(item){
       </div>
 }
     </div>
-    </WorkContext.Provider>
   );
 }
 

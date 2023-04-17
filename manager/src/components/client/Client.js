@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { getAllData, addData, removeData, updateData} from '../../modules/requests';
-import { ClientContext } from "../../modules/context";
 
 function Client(){
     const link = process.env.REACT_APP_MY_LINK;
@@ -91,7 +90,6 @@ function EditData(item){
     return isValid;
   }
   return (
-    <ClientContext.Provider value={data}>
     <div className='content'>
       {modalVisible && (
         <div className='content__modal'>
@@ -188,7 +186,6 @@ function EditData(item){
       </div>
 }
     </div>
-    </ClientContext.Provider>
   );
 }
 
