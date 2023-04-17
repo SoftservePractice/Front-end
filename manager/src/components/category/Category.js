@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import {getAllData, addData, removeData, updateData} from '../../modules/requests';
+import { CategoryContext } from '../../modules/context';
 
 
 function Category(){
@@ -103,7 +104,8 @@ function validate() {
    return isValid;
  }
   return (
-      <div className='content'>
+    <CategoryContext.Provider value={data}>
+        <div className='content'>
           {modalVisible && (
           <div className='content__modal'>
               <div className='content__block-modal'>
@@ -151,7 +153,7 @@ function validate() {
           </div>
 }
       </div>
-              
+    </CategoryContext.Provider>       
   );
 }
 

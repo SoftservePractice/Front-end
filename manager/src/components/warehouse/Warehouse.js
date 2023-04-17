@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { getAllData, addData, removeData, updateData} from '../../modules/requests';
+import { WarehouseContext } from "../../modules/context";
 
 function Warehouse() {
   const link = process.env.REACT_APP_MY_LINK;
@@ -84,6 +85,7 @@ function validate() {
   return isValid;
 }
   return (
+    <WarehouseContext.Provider value={data}>
     <div className='content'>
       {modalVisible && (
         <div className='content__modal'>
@@ -162,6 +164,7 @@ function validate() {
       </div>
 }
     </div>
+    </WarehouseContext.Provider>
   );
 }
 

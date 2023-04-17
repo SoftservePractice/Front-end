@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import {getAllData, addData, removeData, updateData} from '../../modules/requests';
+import { DetailListContext } from '../../modules/context';
 
 function DetailList(){
     const link = process.env.REACT_APP_MY_LINK;
@@ -90,6 +91,7 @@ function DetailList(){
         return isValid;
       }
     return(
+        <DetailListContext.Provider value={data}>
         <div className='content'>
             {modalVisible && (
             <div className='content__modal'>
@@ -139,7 +141,7 @@ function DetailList(){
               </div>
             }
         </div>
-              
+        </DetailListContext.Provider> 
     );
 }
 
