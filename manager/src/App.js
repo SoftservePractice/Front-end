@@ -12,6 +12,7 @@ import Client from "./components/client/Client";
 import Order from "./components/order/Order";
 import WorkList from "./components/workList/WorkList";
 import Car from "./components/car/Car";
+import Technician from "./components/technician/Technician";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
                 <Route exact path="/order" element={<Order />} />
                 <Route exact path="/car" element={<Car />} />
                 <Route exact path="/worklist" element={<WorkList />} />
+                <Route exact path="/technician" element={<Technician />} />
                 <Route path="/*" element={<Error404 />}></Route>
               </Routes>
             </section>
