@@ -24,7 +24,7 @@ function WorkList(){
 
     //ПОЛУЧЕНИЕ ВСЕХ УСЛУГ
     async function GetAllData(){
-        const result = await getAllData("http://localhost:5000/worklist");
+        const result = await getAllData("http://egorhi-001-site1.htempurl.com/worklist");
         setData(result);
     }
     //ДОБАВЛЕНИЕ
@@ -32,12 +32,7 @@ function WorkList(){
         setValidity({name: true, description: true, price: true, duration: true});
         if(validate()){
             const {name, description, price, duration} = editData;
-            const result = await addData("http://localhost:5000/worklist/create", {
-                name: name,
-                description: description,
-                price: Number(price),
-                duration: Number(duration)
-                });
+            const result = await addData(`http://egorhi-001-site1.htempurl.com/worklist?name=${name}&description=${description}&price=${price}&duration=${duration}`);
             setData([...data, result]);
             setModalVisible(false);
             setEditData({name: '', description: '', price: 0, duration: 0});
@@ -45,7 +40,7 @@ function WorkList(){
     };
     //УДАЛЕНИЕ
     async function RemoveData(id){
-        const result = await removeData(`http://localhost:5000/worklist/delete/${id}`);
+        const result = await removeData(`http://egorhi-001-site1.htempurl.com/worklist/${id}`);
         if(result){
             const newData = data.filter(item => item.id !== id);
             setData(newData);
@@ -56,7 +51,7 @@ function WorkList(){
         setValidity({name: true, description: true, price: true, duration: true});
         if(validate()){
             const {id, name, description, price, duration} = editData;
-            const result = await updateData("http://localhost:5000/worklist/update", {
+            const result = await updateData(`http://egorhi-001-site1.htempurl.com/worklist/${id}?name=${name}&description=${description}&price=${price}&duration=${duration}`, {
                     id: Number(id),
                     name: name,
                     description: description,
@@ -139,7 +134,7 @@ function WorkList(){
                 setValidity({name: true, description: true, price: true, duration: true});
                 }}>Add Data</button>
             </div>
-            {!data ? ( <span className='table__no-connect'>No warehouse found</span> ) :
+            {!data ? ( <span className='table__no-connect'>No worklist found</span> ) :
              <div className='content__block-main'>
              <table className='table'>
                  <tr>
