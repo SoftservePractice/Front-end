@@ -14,6 +14,7 @@ import WorkList from "./components/workList/WorkList";
 import Car from "./components/car/Car";
 import Technician from "./components/technician/Technician";
 import TechnicianPage from "./components/TechnicianPage";
+import CategoryDetails from "./components/CategoryDetails";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
                 <Route exact path="/car" element={<Car />} />
                 <Route exact path="/worklist" element={<WorkList />} />
                 <Route exact path="/technician" element={<Technician />} />
+                <Route exact path="/categoryDetail" element={<CategoryDetails />} />
                 <Route path="/*" element={<Error404 />}></Route>
               </Routes>
             </section>

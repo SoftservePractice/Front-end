@@ -17,7 +17,6 @@ function TechnicianPage(){
 
       async function GetData() {
         const result = await getAllData(`${link}/order`);
-        console.log(result);
         setData(result);
       }
 
