@@ -4,14 +4,15 @@ import { getAllData, addData, removeData, updateData} from '../../modules/reques
 function Work(){
     const link = process.env.REACT_APP_MY_LINK;
     const [data, setData] = useState([]);
-    const [editData, setEditData] = useState({ detail: 0, detailPrice: 0, workPrice: 0, order: 0 });
+    const [editData, setEditData] = useState({ detail: 0, detailPrice: 0, workPrice: 0, order: 0, workList: 0 });
     const [modalVisible, setModalVisible] = useState(false);
     const isMountedRef = useRef(false);
     const [validity, setValidity] = useState({
         detail: true, 
         detailPrice: true, 
         workPrice: true, 
-        order: true
+        order: true,
+        workList: true
     });
     useEffect(() => {
         if (isMountedRef.current) {
@@ -29,13 +30,13 @@ function Work(){
       }
       //ДОБАВЛЕНИЕ
     async function AddNewData() {
-        setValidity({detail: true, detailPrice: true, workPrice: true, order: true});
+        setValidity({detail: true, detailPrice: true, workPrice: true, order: true, workList: true});
         if(validate()){
-            const { detail, detailPrice, workPrice, order } = editData;
-            const result = await addData(`${link}/work?detail=${detail}&detailPrice=${detailPrice}&order=${order}&workPrice=${workPrice}`);
+            const { detail, detailPrice, workPrice, order, workList } = editData;
+            const result = await addData(`${link}/work?detail=${detail}&detailPrice=${detailPrice}&order=${order}&workPrice=${workPrice}&work=${workList}`);
             setData([...data, result.newWork])
             setModalVisible(false);
-            setEditData({ detail: 0, detailPrice: 0, workPrice: 0, order: 0 });
+            setEditData({ detail: 0, detailPrice: 0, workPrice: 0, order: 0, workList: 0 });
         }
     }
     //УДАЛЕНИЕ
@@ -48,10 +49,10 @@ function Work(){
     }
     //ОБНОВЛЕНИЕ
   async function UpdateData() {
-    setValidity({detail: true, detailPrice: true, workPrice: true, order: true});
+    setValidity({detail: true, detailPrice: true, workPrice: true, order: true, workList: true});
     if(validate()){
-        const {id, detail, detailPrice, workPrice, order} = editData;
-        const result = await updateData(`${link}/work/${id}?detail=${detail}&detailPrice=${detailPrice}&order=${order}&workPrice=${workPrice}`);
+        const {id, detail, detailPrice, workPrice, order, workList} = editData;
+        const result = await updateData(`${link}/work/${id}?detail=${detail}&detailPrice=${detailPrice}&order=${order}&workPrice=${workPrice}&work=${workList}`);
         if(result){
             const newData = [...data];
             const index = newData.findIndex(item => item.id === id);
@@ -59,17 +60,17 @@ function Work(){
             setData(newData);
         }
         setModalVisible(false);
-        setEditData({ detail: 0, detailPrice: 0, workPrice: 0, order: 0 });
+        setEditData({ detail: 0, detailPrice: 0, workPrice: 0, order: 0, workList: 0  });
     }
 }
 function EditData(item){
     setEditData(item);
     setModalVisible(true);
-    setValidity({detail: true, detailPrice: true, workPrice: true, order: true});
+    setValidity({detail: true, detailPrice: true, workPrice: true, order: true, workList: true});
   }
   function Cancel(){
     setModalVisible(false);
-    setEditData({ detail: 0, detailPrice: 0, workPrice: 0, order: 0 });
+    setEditData({ detail: 0, detailPrice: 0, workPrice: 0, order: 0, workList: 0  });
   }
   function validate() {
     let isValid = true;
@@ -88,6 +89,10 @@ function EditData(item){
     if (!editData.order || editData.order < 1) {
         isValid = false;
         setValidity((prevValidity) => ({ ...prevValidity, order: false }));
+    }
+    if (!editData.workList || editData.workList < 1) {
+        isValid = false;
+        setValidity((prevValidity) => ({ ...prevValidity, workList: false }));
     }
     return isValid;
   }
@@ -135,6 +140,15 @@ function EditData(item){
               }
             />
 
+          <input placeholder="WorkList ID..." 
+            type={'number'} 
+            value={editData.workList} 
+            className={!validity.workList ? "main-input-invalid": "main-input"}
+              onChange={(e) =>
+                setEditData({ ...editData, workList: e.target.value })
+              }
+            />
+
             {!editData.id ? (
               <button className='content__add-btn-modal main-btn'onClick={AddNewData}>
                 Add
@@ -152,7 +166,7 @@ function EditData(item){
           className='content__btn-add main-btn'
         onClick={() => {
           setModalVisible(true);
-          setValidity({detail: true, detailPrice: true, workPrice: true, order: true});
+          setValidity({detail: true, detailPrice: true, workPrice: true, order: true, workList: true});
         }}
       >
         Add Data
@@ -167,6 +181,7 @@ function EditData(item){
                 <th className='table-point'>Detail Price</th>
                 <th className='table-point'>Work Price</th>
                 <th className='table-point'>Order ID</th>
+                <th className='table-point'>WorkList ID</th>
                 <th className='table-point'>Remove</th>
                 <th className='table-point'>Update</th>
               </tr>
@@ -180,6 +195,7 @@ function EditData(item){
                  <th>{item.detailPrice}</th>
                  <th>{item.workPrice}</th>
                  <th>{item.order}</th>
+                 <th>{item.workList}</th>
                  <th> <button className="table-btn main-btn" onClick={() => RemoveData(item.id)}>Remove</button></th>
                  <th><button className="table-btn main-btn" onClick={() => EditData(item)}>Update</button> </th>
                  </tr>

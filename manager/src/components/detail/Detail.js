@@ -141,39 +141,40 @@ function validate() {
       )}
       
       <div className='content__block-main main-block'>
-      {!data ? (<span className='table__no-connect'>No detail found</span>) : (
-          
-                <div className='block__card' key={data.id}>
-                  <div className='block__info'>
-                    <p className='block__field'>Model:{data.model}</p>
-                      <p className='block__field'>
-                        Vendor code: {data.vendorCode}
-                      </p>
-                      <p className='block__field'>Description: {data.description}</p>
-                      <p className='block__field'>
-                        Compatible Vehicles: {data.compatibleVehicles}
-                      </p>
-                      <p className='block__field'>
-                        Category id: {data.catId}
-                      </p>
-                    
-                  </div>
-                  <div className="block__btns">
-                  <button
-                    className='block__btn main-btn'
-                    onClick={() => RemoveData(data.id)}
-                  >
-                    Remove
-                  </button>
-                  <button
-                    className='block__btn main-btn'
-                    onClick={() => EditData(data)}
-                  >
-                    Update
-                  </button>
-                  </div>
-                </div>
-      )}
+      {!data ? (<span className='table__no-connect'>No detail found</span>) : 
+          <div className='content__block-main'>
+          <table className='table'>
+              <tr>
+              
+                <th className='table-point'>Model</th>
+                <th className='table-point'>Description</th>
+                <th className='table-point'>Compatible Vehicles</th>
+                <th className='table-point'>Category id</th>
+                <th className='table-point'>Remove</th>
+                <th className='table-point'>Update</th>
+              </tr>
+        {(
+         data
+         .filter((item) =>
+           item.model.toLowerCase().includes(filterModel.toLowerCase())
+         )
+         .map((item) => {
+          return (
+            <tr key={item.id}>
+             <th>{item.model}</th>
+             <th>{item.vendorCode}</th>
+             <th>{item.description}</th>
+             <th>{item.compatibleVehicles}</th>
+             <th>{item.catId}</th>
+             <th> <button className="table-btn main-btn" onClick={() => RemoveData(item.id)}>Remove</button></th>
+             <th><button className="table-btn main-btn" onClick={() => EditData(item)}>Update</button> </th>
+             </tr>
+          );
+        })
+    )}
+    </table> 
+  </div>     
+      }
     </div>
     </div>
 )};

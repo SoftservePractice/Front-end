@@ -2,6 +2,7 @@ import {useState, useEffect, useRef} from 'react';
 import {getAllData, addData, removeData, updateData} from '../../modules/requests';
 
 function Car() {
+    const link = process.env.REACT_APP_MY_LINK;
     const [filterModel, setFilterModel] = useState('');
     const [data, setData] = useState([]);
     const [editData, setEditData] = useState({mark: '', year: '', vin: '', carNumber: '', client: 0});
@@ -25,7 +26,7 @@ function Car() {
 
     //ПОЛУЧЕНИЕ ВСЕХ ДЕТАЛЕЙ
     async function GetAllData() {
-        const result = await getAllData("/car");
+        const result = await getAllData(`${link}/car`);
         setData(result);
     }
 
@@ -34,14 +35,8 @@ function Car() {
         setValidity({mark: true, year: true, vin: true, carNumber: true, client: true})
         if (validate()) {
             const {mark, year, vin, carNumber, client} = editData;
-            const result = await addData("/car/create", {
-                mark: mark,
-                year: year,
-                vin: vin,
-                carNumber: carNumber,
-                client: Number(client)
-            });
-            setData([...data, result]);
+            const result = await addData(`${link}/car?mark=${mark}&year=${year}&vin=${vin}&carNumber=${carNumber}&clientId=${client}`);
+            setData([...data, result.car]);
             setModalVisible(false);
             setEditData({mark: '', year: '', vin: '', carNumber: '', client: 0});
         }
@@ -49,7 +44,7 @@ function Car() {
 
     //УДАЛЕНИЕ
     async function RemoveData(id) {
-        const result = await removeData(`/car/delete/${id}`);
+        const result = await removeData(`${link}/car/${id}`);
         if (result) {
             const newData = data.filter(item => item.id !== id);
             setData(newData);
@@ -61,14 +56,7 @@ function Car() {
         setValidity({mark: true, year: true, vin: true, carNumber: true, client: true})
         if (validate()) {
             const {id, mark, year, vin, carNumber, client} = editData;
-            const result = await updateData("/car/update", {
-                id: Number(id),
-                mark: mark,
-                year: year,
-                vin: vin,
-                carNumber: carNumber,
-                client: Number(client)
-            });
+            const result = await updateData(`${link}/car/${id}?mark=${mark}&year=${year}&vin=${vin}&carNumber=${carNumber}&client=${client}`);
             if (result) {
                 const newData = [...data];
                 const index = newData.findIndex(item => item.id === Number(id));
