@@ -11,7 +11,7 @@ async function getAllData(url) {
     };
   };
 //ДОБАВЛЕНИЕ
-async function addData(url, object){
+async function addData(url){
     try {
         const response = await fetch(url,
             {
