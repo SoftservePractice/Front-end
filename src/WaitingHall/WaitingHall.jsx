@@ -17,38 +17,21 @@ const AboutUS = () => {
           <main id="about" >
             <div className="aboutMe-containerW">
               <div className="about-decor">
-                 <h1 className="about-senss">Зал Ожидания</h1>
+                 <h1 className="about-senss">Зал очікуванн</h1>
                 <div className="about-dots1">
                   <img src={decor1} alt="" />
                 </div>
-                <div className="about-shady">
+                <div className="about-shadyWWH">
                   <img src={Zal} alt="" />
                 </div>
               </div>
               <div >
                 <div
-                  className="about-texts" >
+                  className="about-textsWWH" >
                   <div className="title">
-                    <h3>Оборудованные зоны отдыха и кухня</h3>
+                    <h3>Обладнані зони відпочинку та кухня</h3>
                     <h3>Чай</h3>
-                    <h3>Кофе</h3>
-                  </div>
-                  <div className="about-description">
-                    <div id="foo" unselectable="on" class="unselectable">
-                      <div
-                      
-                      />
-                    </div>
-                  </div>
-
-                  <div className="itscv">
-                    <a
-                      href="1"
-                      download="RESUME.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                    </a>
+                    <h3>Кава</h3>
                   </div>
                 </div>
               </div>

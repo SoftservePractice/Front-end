@@ -83,6 +83,14 @@
   width: 2535px;
   height: 1200px;
 }
+.about-textsWWH {
+  position: absolute;
+  left: 50%;
+  z-index: 10;
+  top:400px;
+  font-size: 1.5em;
+  color: #ffffff;
+}
 }
 @media screen and (max-width:1999px) {
   .about-dots1 img {
@@ -90,6 +98,71 @@
     z-index: 1;
     width: 1900px;
     height: 1000px;
+  }
+  .about-senss {
+    position: absolute;
+    left: 10%;
+    z-index: 10;
+    top:50px;
+    font-size: 5.5em;
+    color: #ffffff;
+  }
+  .about-textsWWH {
+    position: absolute;
+    left: 50%;
+    z-index: 10;
+    top:400px;
+    font-size: 1.5em;
+    color: #ffffff;
+  }
+  .about-shadyWWH {
+    position: absolute;
+    right: 50%;
+    z-index: 20;
+    top:200px;
+  }
+  
+  .about-shadyWWH img {
+    opacity: 0.9;
+    width: auto;
+    z-index: 3;
+  }
+}
+
+@media screen and (max-width:1299px) {
+  .about-dots1 img {
+    opacity: 1;
+    z-index: 1;
+    width: 1900px;
+    height: 1000px;
+  }
+  .about-senss {
+    position: absolute;
+    left: 10%;
+    z-index: 10;
+    top:50px;
+    font-size: 5.5em;
+    color: #ffffff;
+  }
+  .about-textsWWH {
+    position: absolute;
+    left: 50%;
+    z-index: 10;
+    top:400px;
+    font-size: 1.5em;
+    color: #ffffff;
+  }
+  .about-shadyWWH {
+    position: absolute;
+    right: 55%;
+    z-index: 20;
+    top:200px;
+  }
+  
+  .about-shadyWWH img {
+    opacity: 0.9;
+    width: 700px;
+    z-index: 3;
   }
 }
 
@@ -104,111 +177,36 @@
   z-index: 3;
 }
 
-.about-shady {
-  position: absolute;
-  right: 50%;
-  z-index: 20;
-  top:200px;
-}
-.about-texts {
-  position: absolute;
-  left: 50%;
-  z-index: 10;
-  top:400px;
-  font-size: 1.5em;
-  color: #ffffff;
-}
-.about-senss {
-  position: absolute;
-  left: 10%;
-  z-index: 10;
-  top:50px;
-  font-size: 5.5em;
-  color: #ffffff;
-}
-.about-shady img {
-  opacity: 0.9;
-  width: auto;
-  z-index: 3;
-}
-.bxl-javascript {
-  color: yellow;
-}
-.bxl-postgresql {
-  color: rgb(255, 196, 0) !important;
-}
-.bxl-react {
-  color: aqua;
-}
-.bxl-python {
-  color: #7c97ee;
-}
-.bxs-data {
-  color: rgb(255, 238, 0);
-}
-.download-cv {
-  height: 60px;
-  width: 180px;
-  outline: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-  font-size: 13px;
-  border: none;
-  color: var(--color-background-2);
-  border-radius: 5px;
-  border: 1px solid var(--color-button);
-  background: var(--color-button-hover);
-}
-
-/*  */
-/*  */
-*.unselectable {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none !important;
-}
-.ck-editor__top {
-  display: none !important;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none !important;
-}
-.ck-editor__top p,
-strong,
-i {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none !important;
-}
-.ck-content {
-  user-select: none !important;
-}
-.ck-content i {
-  color: #006eff !important;
-  pointer-events: none;
-}
-.ck.ck-editor__main > .ck-editor__editable {
-  background: none !important;
-  border: none !important;
-  pointer-events: none !important;
-}
 
 /* Responsiveness */
 @media only screen and (min-width: 2560px) {
   .abouMe-row img {
     width: 50% !important;
   }
+  .about-senss {
+    position: absolute;
+    left: 10%;
+    z-index: 10;
+    top:50px;
+    font-size: 5.5em;
+    color: #ffffff;
+  }
+  .about-shadyWWH {
+    position: absolute;
+    right: 50%;
+    z-index: 20;
+    top:200px;
+  }
+  
+  .about-shadyWWH img {
+    opacity: 0.9;
+    width: auto;
+    z-index: 3;
+  }
 }
 @media only screen and (max-width: 865px) {
   .aboutMe-containerW {
-    padding: 30px 10px;
+    padding: 30px 10px 650px 0px;
     overflow: hidden;
   }
   .abouMe-row .title h3 {
@@ -250,11 +248,39 @@ i {
     font-size: 12px;
     height: 45px;
   }
+  .about-senss {
+    position: absolute;
+    left: 10%;
+    z-index: 10;
+    top:50px;
+    font-size: 3.0em;
+    color: #ffffff;
+  }
+  .about-textsWWH {
+    position: absolute;
+    left: 65%;
+    z-index: 10;
+    top:300px;
+    font-size: 1.1em;
+    color: #ffffff;
+  }
+  .about-shadyWWH {
+    position: absolute;
+    right: 35%;
+    z-index: 20;
+    top:250px;
+  }
+  
+  .about-shadyWWH img {
+    opacity: 0.9;
+    width: 500px;
+    z-index: 3;
+  }
 }
 
 @media only screen and (max-width: 768px) {
   .aboutMe-containerW {
-    padding: 30px 0px;
+    padding: 30px 0px 650px 0px;
     overflow: hidden;
   }
   .abouMe-row .title h3 {
@@ -285,6 +311,35 @@ i {
     width: 140px;
     font-size: 12px !important;
     height: 45px;
+  }
+  .about-senss {
+    position: absolute;
+    left: 10%;
+    z-index: 10;
+    top:50px;
+    font-size: 2.0em;
+    color: #ffffff;
+  }
+  .about-textsWWH {
+    position: absolute;
+    left: 65%;
+    z-index: 10;
+    top:300px;
+    font-size: 0.9em;
+    color: #ffffff;
+  }
+
+  .about-shadyWWH {
+    position: absolute;
+    right: 35%;
+    z-index: 20;
+    top:250px;
+  }
+  
+  .about-shadyWWH img {
+    opacity: 0.9;
+    width: 350px;
+    z-index: 3;
   }
 }
 

@@ -113,6 +113,27 @@
     z-index: 20;
     top:450px;
   }
+  .about-shadyCar img {
+    opacity: 1;
+    z-index: 1;
+    width: 1500px;
+    height: 280px;
+  }
+  .about-senssCare {
+    position: absolute;
+    left: 5%;
+    z-index: 10;
+    top:50px;
+    font-size: 4.0em;
+  }
+  .about-textsCareC {
+    position: absolute;
+    left: 25%;
+    z-index: 10;
+    font-size: 1.6em;
+    top: 350px;
+    color: #000000;
+  }
 }
 @media screen and (max-width:1950px) {
   .about-shadyCar {
@@ -121,106 +142,56 @@
     z-index: 20;
     top:450px;
   }
+  .about-shadyCar img {
+    opacity: 1;
+    z-index: 1;
+    width: 1200px;
+    height: 180px;
+  }
+  .about-senssCare {
+    position: absolute;
+    left: 5%;
+    z-index: 10;
+    top:50px;
+    font-size: 4.0em;
+  }
+  .about-textsCareC {
+    position: absolute;
+    left: 25%;
+    z-index: 10;
+    font-size: 1.6em;
+    top: 350px;
+    color: #000000;
+  }
 }
-.about-shadyCar img {
-  opacity: 1;
-  z-index: 1;
-  width: 1500px;
-  height: 280px;
-}
-.about-textsCareC {
-  position: absolute;
-  left: 25%;
-  z-index: 10;
-  font-size: 1.6em;
-  top: 350px;
-  color: #000000;
-}
-.about-senssCare {
-  position: absolute;
-  left: 5%;
-  z-index: 10;
-  top:50px;
-  font-size: 4.0em;
-}
+
+
+
 .about-shady img {
   opacity: 0.9;
   width: auto;
   z-index: 3;
-}
-.bxl-javascript {
-  color: yellow;
-}
-.bxl-postgresql {
-  color: rgb(255, 196, 0) !important;
-}
-.bxl-react {
-  color: aqua;
-}
-.bxl-python {
-  color: #7c97ee;
-}
-.bxs-data {
-  color: rgb(255, 238, 0);
-}
-.download-cv {
-  height: 60px;
-  width: 180px;
-  outline: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-  font-size: 13px;
-  border: none;
-  color: var(--color-background-2);
-  border-radius: 5px;
-  border: 1px solid var(--color-button);
-  background: var(--color-button-hover);
-}
-
-/*  */
-/*  */
-*.unselectable {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none !important;
-}
-.ck-editor__top {
-  display: none !important;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none !important;
-}
-.ck-editor__top p,
-strong,
-i {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none !important;
-}
-.ck-content {
-  user-select: none !important;
-}
-.ck-content i {
-  color: #006eff !important;
-  pointer-events: none;
-}
-.ck.ck-editor__main > .ck-editor__editable {
-  background: none !important;
-  border: none !important;
-  pointer-events: none !important;
 }
 
 /* Responsiveness */
 @media only screen and (min-width: 2560px) {
   .abouMe-row img {
     width: 50% !important;
+  }
+  .about-senssCare {
+    position: absolute;
+    left: 5%;
+    z-index: 10;
+    top:50px;
+    font-size: 4.0em;
+  }
+  .about-textsCareC {
+    position: absolute;
+    left: 25%;
+    z-index: 10;
+    font-size: 1.6em;
+    top: 350px;
+    color: #000000;
   }
 }
 @media only screen and (max-width: 865px) {
@@ -267,6 +238,34 @@ i {
     font-size: 12px;
     height: 45px;
   }
+  .about-senssCare {
+    position: absolute;
+    left: 5%;
+    z-index: 10;
+    top:50px;
+    font-size: 2.0em;
+  }
+  .about-textsCareC {
+    position: absolute;
+    left: 5%;
+    z-index: 10;
+    font-size: 1.1em;
+    top: 350px;
+    color: #000000;
+  }
+  .about-shadyCar {
+    position: absolute;
+    right: 0%;
+    z-index: 20;
+    top:450px;
+  }
+  .about-shadyCar img {
+    opacity: 1;
+    z-index: 1;
+    width: 600px;
+    height: 150px;
+  }
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -302,6 +301,13 @@ i {
     width: 140px;
     font-size: 12px !important;
     height: 45px;
+  }
+  .about-senssCare {
+    position: absolute;
+    left: 5%;
+    z-index: 10;
+    top:50px;
+    font-size: 2.0em;
   }
 }
 

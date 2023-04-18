@@ -13,9 +13,9 @@ const Services = () => {
       <section id="services">
         <div className="service-container">
           <div className="service-title">
-            <h2>Какие  услуши мы предлагаем вам</h2>
+            <h2>Які послуги ми пропонуємо вам</h2>
 
-            <h3>Services</h3>
+            <h3>Послуги</h3>
           </div>
 
           <div className="service-row">

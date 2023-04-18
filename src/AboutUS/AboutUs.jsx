@@ -25,36 +25,19 @@ const AboutUS = () => {
                 <div className="about-dots1Us">
                   <img src={decor1} alt="" />
                 </div>
-                <div className="about-dots">
+                <div className="about-dotsUU">
                   <img src={shap} alt="" />
                 </div>
-                <div className="about-shady">
+                <div className="about-shadyUU">
                   <img src={shady} alt="" />
                 </div>
               </div>
               <div >
                 <div
-                  className="about-texts" >
+                  className="about-textsUss" >
                   <div className="title">
-                    <h2>Обратись к механику не разводи напику</h2>
-                    <h3>С уважением к Вам  с любовью к автомобилю!</h3>
-                  </div>
-                  <div className="about-description">
-                    <div id="foo" unselectable="on" class="unselectable">
-                      <div
-                      
-                      />
-                    </div>
-                  </div>
-
-                  <div className="itscv">
-                    <a
-                      href="1"
-                      download="RESUME.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                    </a>
+                    <h2>Звернись до механіка не розводь паніку</h2>
+                    <h3>З повагою до Вас із любов'ю до автомобіля!</h3>
                   </div>
                 </div>
               </div>

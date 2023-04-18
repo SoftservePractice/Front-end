@@ -35,11 +35,6 @@ const AboutUS = () => {
                     <h2>+3800058546</h2>
                     <h2>+3809532415</h2>
                   </div>
-                  <div className="about-description">
-                    <div id="foo" unselectable="on" class="unselectable">
-                      <div/>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

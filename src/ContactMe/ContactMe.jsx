@@ -15,7 +15,7 @@ const ContactMe = () => {
           <div class="row align-items-center mb-5">
             <div class="col-lg-5 col-md-12">
               <div class="work-togather-text">
-                <h2 class="h2-title text-white ">Быстрая запись на сервис</h2>
+                <h2 class="h2-title text-white ">Швидкий запис на сервіс</h2>
                 <p>
                  
                 </p>
@@ -24,8 +24,8 @@ const ContactMe = () => {
             <div class="col-lg-4 col-md-7">
               <div class="work-togather-form">
                 <input
-                  type="email"
-                  name="Email"
+                  type="text"
+                  name="name"
                   class="form-input-one subscribe-input"
                   placeholder="Name"
                   required=""
@@ -34,11 +34,12 @@ const ContactMe = () => {
               <div><p></p></div>
               <div class="work-togather-form">
                 <input
-                  type="email"
-                  name="Email"
+                  type="tel"
+                  name="phone"
                   class="form-input-one subscribe-input"
                   placeholder="Phone Number"
                   required=""
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 />
               </div>
               <div><p></p></div>
@@ -54,11 +55,12 @@ const ContactMe = () => {
               <div><p></p></div>
               <div class="work-togather-form">
                 <input
-                  type="email"
-                  name="Email"
+                  type="date"
+                  name="trip-start"
                   class="form-input-one subscribe-input"
                   placeholder="Date and time of recording"
-                  required=""
+                  min="2022-01-01" max="2024-12-31"
+                  required 
                 />
               </div>
             </div>
@@ -66,7 +68,7 @@ const ContactMe = () => {
               <div class="work-togather-form-btn">
               <div><p></p></div>
                 <button type="submit" class="sec-btn">
-                  Подать заявку
+                Подать заявку
                 </button>
               </div>
             </div>

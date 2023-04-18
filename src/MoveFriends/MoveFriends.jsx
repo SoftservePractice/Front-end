@@ -21,7 +21,7 @@ const AboutUS = () => {
                 <div className="about-dots1M">
                   <img src={decor1} alt="" />
                 </div>
-                <div className="about-shady">
+                <div className="about-shadyMF">
                   <img src={Vorker} alt="" />
                 </div>
               </div>
@@ -29,28 +29,9 @@ const AboutUS = () => {
                 <div
                   className="about-textsF" >
                   <div className="title">
-                    <h3>Подарите себе и друзья возможность </h3>
-                    <h3>сделать заказ со скидкой 10%</h3>
-                    <h3>Порекомендуй нас и получи свой бонус</h3>
-
-
-                  </div>
-                  <div className="about-description">
-                    <div id="foo" unselectable="on" class="unselectable">
-                      <div
-                      
-                      />
-                    </div>
-                  </div>
-
-                  <div className="itscv">
-                    <a
-                      href="1"
-                      download="RESUME.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                    </a>
+                    <h3>Подаруйте собі та друзі можливість </h3>
+                    <h3>зробити замовлення зі знижкою 10%</h3>
+                    <h3>Рекомендуй нас та отримай свій бонус</h3>
                   </div>
                 </div>
               </div>
