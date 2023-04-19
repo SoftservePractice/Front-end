@@ -32,7 +32,7 @@ function Warehouse() {
     if(validate()){
         const { name, address } = editData;
         const result = await addData(`${link}/warehouse?name=${name}&adress=${address}`);
-        setData([...data, result])
+        setData([...data, result.warehouse])
         setModalVisible(false);
         setEditData({ name: '', address: '' });
     }

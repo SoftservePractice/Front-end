@@ -45,7 +45,7 @@ function Detail() {
   //УДАЛЕНИЕ
   async function RemoveData(id) {
     console.log(id)
-    const result = await removeData( `${link}/detail/${id}`);
+    const result = await removeData(`${link}/detail/${id}`);
     if (result) {
       const newData = data.filter((item) => item.id !== id);
       setData(newData);
