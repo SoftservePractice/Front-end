@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 import CategoryDetails from "../CategoryDetails";
+import TechnicianPage from "../TechnicianPage";
 
 function Tecninec() {
   return (
@@ -20,9 +21,10 @@ function Tecninec() {
             </div>
             <section className="main">
               <Routes>
-                <Route exact path="/" element={<Main />} />
-                <Route exact path="/detail" element={<Detail />} />
-                <Route exact path="/categoryDetail" element={<CategoryDetails />} />
+                <Route exact path="technician/" element={<Main />} />
+                <Route exact path="/technician/detail" element={<Detail/>} />
+                <Route exact path="technician/categoryDetail" element={<CategoryDetails />} />
+                <Route exact path="technician/technicianPage" element={<TechnicianPage />} />
                 <Route path="/*" element={<Error404 />}></Route>
               </Routes>
             </section>
