@@ -36,8 +36,9 @@ function Detail() {
     setValidity({model: true, vendorCode: true,description: true,compatibleVehicles: true,category: true})
     if(validate()){
         const {model, vendorCode, description, compatibleVehicles, category} = editData;
-        const result = await addData(`${link}/detail?model=${model}&vendorCode=${vendorCode}&description=${description}&compatibleVehicles=${compatibleVehicles}$category=${category}`);
-        setData([...data, result]);
+        const result = await addData(`${link}/Detail?model=${model}&vendorCode=${vendorCode}&description=${description}&compatibleVehicles=${compatibleVehicles}&catId=${category}`);
+        console.log(result)
+        setData([...data, result.detail]);
         setModalVisible(false);
         setEditData({model: '', vendorCode: '', description: '', compatibleVehicles: '', category: 0});
     }
@@ -139,7 +140,15 @@ function validate() {
           </div>
         </div>
       )}
-      
+       <button
+          className='content__btn-add main-btn'
+        onClick={() => {
+          setModalVisible(true);
+          setValidity({model: true, vendorCode: true,description: true,compatibleVehicles: true,category: true})
+        }}
+      >
+        Add Data
+      </button>
       <div className='content__block-main main-block'>
       {!data ? (<span className='table__no-connect'>No detail found</span>) : 
           <div className='content__block-main'>

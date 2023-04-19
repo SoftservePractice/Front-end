@@ -26,6 +26,7 @@ function WorkList(){
     //ПОЛУЧЕНИЕ ВСЕХ УСЛУГ
     async function GetAllData(){
         const result = await getAllData(`${link}/worklist`);
+        console.log(result)
         setData(result);
     }
     //ДОБАВЛЕНИЕ
@@ -139,7 +140,6 @@ function WorkList(){
              <div className='content__block-main'>
              <table className='table'>
                  <tr>
-                   <th className='table-point'>ID</th>
                    <th className='table-point'>Name</th>
                    <th className='table-point'>Description</th>
                    <th className='table-point'>Price</th>

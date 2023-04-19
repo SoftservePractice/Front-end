@@ -60,14 +60,7 @@ function Car() {
             if (result) {
                 const newData = [...data];
                 const index = newData.findIndex(item => item.id === Number(id));
-                newData[index] = {
-                    id: Number(id),
-                    mark: mark,
-                    year: year,
-                    vin: vin,
-                    carNumber: carNumber,
-                    client: Number(client)
-                };
+                newData[index] = {...editData};
                 setData(newData);
             }
             setModalVisible(false);
