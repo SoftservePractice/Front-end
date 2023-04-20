@@ -108,7 +108,10 @@ function validate() {
           <div className='content__modal'>
               <div className='content__block-modal'>
                   <button className='content__cancel-btn-modal' onClick={Cancel}>X</button>
+                  <p style={{margin:5}}>Category Name</p>
                   <input className={!validity.name ? "main-input-invalid": "main-input"} placeholder='Name...' value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })}></input>
+                  
+                  <p style={{margin:5}}>Parent Category ID</p>
                   <input className={!validity.parentCategory ? "main-input-invalid": "main-input"} type={'number'} placeholder='Parent Category ID...' value={editData.parentCategory} onChange={(e) => setEditData({ ...editData, parentCategory: e.target.value })}></input>
                   {!editData.id ? 
                   <button className='content__add-btn-modal main-btn' onClick={AddData}>Add</button> :

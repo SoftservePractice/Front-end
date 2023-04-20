@@ -106,18 +106,22 @@ function WorkList(){
                 <div className='content__block-modal'>
                     <button className='content__cancel-btn-modal' onClick={Cancel}>X</button>
 
+                    <p style={{ margin: 5 }}>Name</p>
                     <input placeholder='Name...' value={editData.name} 
                     className={!validity.name ? "main-input-invalid": "main-input"}
                     onChange={(e) => setEditData({...editData, name: e.target.value})}></input>
                     
+                    <p style={{ margin: 5 }}>Description</p>
                     <input placeholder='Description...' value={editData.description} 
                     className={!validity.description ? "main-input-invalid": "main-input"}
                     onChange={(e) => setEditData({...editData, description: e.target.value})}></input>
                     
+                    <p style={{ margin: 5 }}>Price</p>
                     <input type={'number'} placeholder='Price...' value={editData.price} 
                     className={!validity.price ? "main-input-invalid": "main-input"}
                     onChange={(e) => setEditData({...editData, price: e.target.value})}></input>
                     
+                    <p style={{ margin: 5 }}>Duration</p>
                     <input type={'number'} placeholder='Duration...' value={editData.duration} 
                     className={!validity.duration ? "main-input-invalid": "main-input"}
                     onChange={(e) => setEditData({...editData, duration: e.target.value})}></input>

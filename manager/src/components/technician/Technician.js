@@ -114,22 +114,27 @@ function Technician(){
                 <div className='content__block-modal'>
                     <button className='content__cancel-btn-modal' onClick={Cancel}>X</button>
 
+                    <p style={{ margin: 5 }}>Name</p>
                     <input placeholder='Name...' value={editData.name} 
                     className={!validity.name ? "main-input-invalid": "main-input"}
                     onChange={(e) => setEditData({...editData, name: e.target.value})}></input>
                     
+                    <p style={{ margin: 5 }}>Phone</p>
                     <input placeholder='Phone...' value={editData.phone} 
                     className={!validity.phone ? "main-input-invalid": "main-input"}
                     onChange={(e) => setEditData({...editData, phone: e.target.value})}></input>
                     
+                    <p style={{ margin: 5 }}>Specialization</p>
                     <input placeholder='Specialization...' value={editData.specialization} 
                     className={!validity.specialization ? "main-input-invalid": "main-input"}
                     onChange={(e) => setEditData({...editData, specialization: e.target.value})}></input>
                     
+                    <p style={{ margin: 5 }}>Start Work</p>
                     <input type={'date'} placeholder='Start Work...' value={editData.startWork} 
                     className={!validity.startWork ? "main-input-invalid": "main-input"}
                     onChange={(e) => setEditData({...editData, startWork: e.target.value})}></input>
                     
+                    <p style={{ margin: 5 }}>Start Work In Company</p>
                     <input type={'date'} placeholder='Start Work In Company...' value={editData.startWorkInCompany} 
                     className={!validity.startWorkInCompany ? "main-input-invalid": "main-input"}
                     onChange={(e) => setEditData({...editData, startWorkInCompany: e.target.value})}></input>

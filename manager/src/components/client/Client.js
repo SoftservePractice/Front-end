@@ -96,6 +96,7 @@ function EditData(item){
           <div className='content__block-modal'>
             <button className='content__cancel-btn-modal' onClick={Cancel}> X</button>
 
+            <p style={{margin:5}}>Client Name</p>
             <input
               placeholder="Name..."
               value={editData.name}
@@ -105,6 +106,7 @@ function EditData(item){
               }
             />
 
+            <p style={{margin:5}}>Phone Number</p>
             <input placeholder="Phone..." 
             value={editData.phone} 
             className={!validity.phone ? "main-input-invalid": "main-input"}
@@ -113,6 +115,7 @@ function EditData(item){
               }
             />
 
+            <p style={{margin:5}}>Telegram ID</p>
             <input placeholder="Telegram ID..." 
             type={'number'} 
             value={editData.telegramId} 
@@ -122,6 +125,7 @@ function EditData(item){
               }
             />
 
+            <p style={{margin:5}}>Email</p>
             <input placeholder="Email..." 
             type={'email'} 
             value={editData.email} 

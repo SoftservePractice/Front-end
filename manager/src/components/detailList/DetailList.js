@@ -95,8 +95,11 @@ function DetailList(){
             <div className='content__modal'>
                 <div className='content__block-modal'>
                     <button className='content__cancel-btn-modal' onClick={Cancel}>X</button>
+                    <p style={{margin:5}}>Warehouse ID</p>
                     <input className={!validity.warehouse ? "main-input-invalid": "main-input"} type={'number'} placeholder='Warehouse ID...' value={editData.warehouse} onChange={(e) => setEditData({...editData, warehouse: e.target.value})}></input>
+                    <p style={{margin:5}}>Detail ID</p>
                     <input className={!validity.detail ? "main-input-invalid": "main-input"} type={'number'} placeholder='Detail Id...' value={editData.detail} onChange={(e) => setEditData({...editData, detail: e.target.value})}></input>
+                    <p style={{margin:5}}>Count</p>
                     <input className={!validity.count ? "main-input-invalid": "main-input"} type={'number'} placeholder='Count...' value={editData.count}  onChange={(e) => setEditData({...editData, count: e.target.value})}></input>
                     {!editData.id ? 
                     <button className='content__add-btn-modal main-btn' onClick={AddData}>Add</button> :

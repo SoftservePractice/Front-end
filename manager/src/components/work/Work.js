@@ -102,7 +102,7 @@ function EditData(item){
         <div className='content__modal'>
           <div className='content__block-modal'>
             <button className='content__cancel-btn-modal' onClick={Cancel}> X</button>
-
+            <p style={{margin:5}}>Detail ID</p>
             <input
               placeholder="Detail ID..."
               type={'number'} 
@@ -113,6 +113,7 @@ function EditData(item){
               }
             />
 
+            <p style={{margin:5}}>Detail Price</p>
             <input placeholder="Detail price..." 
             type={'number'} 
             value={editData.detailPrice} 
@@ -122,6 +123,7 @@ function EditData(item){
               }
             />
 
+            <p style={{margin:5}}>Work Price</p>
             <input placeholder="Work price..." 
             type={'number'} 
             value={editData.workPrice} 
@@ -131,6 +133,7 @@ function EditData(item){
               }
             />
 
+            <p style={{margin:5}}>Order ID</p>
             <input placeholder="Order ID..." 
             type={'number'} 
             value={editData.order} 
@@ -140,6 +143,7 @@ function EditData(item){
               }
             />
 
+          <p style={{margin:5}}>WorkList ID</p>
           <input placeholder="WorkList ID..." 
             type={'number'} 
             value={editData.workList} 

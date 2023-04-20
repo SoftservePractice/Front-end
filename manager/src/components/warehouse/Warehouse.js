@@ -89,11 +89,13 @@ function validate() {
         <div className='content__modal'>
           <div className='content__block-modal'>
             <button className='content__cancel-btn-modal' onClick={Cancel}> X</button>
+            <p style={{margin:5}}>Warehouse Name</p>
             <input placeholder="Name..." value={editData.name} className={!validity.name ? "main-input-invalid": "main-input"}
               onChange={(e) =>
                 setEditData({ ...editData, name: e.target.value })
               }
             />
+            <p style={{margin:5}}>Warehouse Address</p>
             <input
               placeholder="Address..."
               value={editData.address}
