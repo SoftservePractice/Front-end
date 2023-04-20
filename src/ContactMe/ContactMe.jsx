@@ -1,7 +1,48 @@
 import "./ContactMe.css";
 import FusrtRecord from "../Images/decoration/FusrtRecord.png";
+import { useEffect,useState } from "react";
+
+
+
 
 const ContactMe = () => {
+const [inputnamee, setInputnamee] = useState('');
+const [inputphone, setInputphone] = useState('');
+const [inputemail, setInputemail] = useState('');
+const [inputdate, setInputdate] = useState('');
+const [id, setid] = useState(0);
+
+  async function AddData() {
+    fetch("http://vanl0076115.online-vm.com/order/", {
+      method: 'Post', 
+      headers: {
+          'accept': 'text/plain',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({
+          'name': inputnamee,
+          'phone': inputphone,
+          'email': inputemail,
+          'date': inputdate,
+      })
+  }).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => {
+          setid(data.id)
+      })
+      }
+  })
+  }
+  
+
+  useEffect(() => {
+    if(id!=0){
+    //document.location.href =`https://t.me/WrrrumService_bot?start=${id}`
+    window.open(`https://t.me/WrrrumService_bot?start=${id}`);
+    }
+}, [id])
+
   return (
     <>
       <section id="contact ">
@@ -28,6 +69,8 @@ const ContactMe = () => {
                   name="name"
                   class="form-input-one subscribe-input"
                   placeholder="Name"
+                  value={inputnamee}
+                  onChange={(e)=>setInputnamee(e.target.value)}    
                   required=""
                 />
               </div>
@@ -38,6 +81,8 @@ const ContactMe = () => {
                   name="phone"
                   class="form-input-one subscribe-input"
                   placeholder="Phone Number"
+                  value={inputphone}
+                  onChange={(e)=>setInputphone(e.target.value)}    
                   required=""
                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 />
@@ -46,20 +91,23 @@ const ContactMe = () => {
               <div class="work-togather-form">
                 <input
                   type="email"
-                  name="Email"
+                  name="email"
                   class="form-input-one subscribe-input"
                   placeholder="Email Address"
-                  required=""
+                  value={inputemail}
+                  onChange={(e)=>setInputemail(e.target.value)}    
                 />
               </div>
               <div><p></p></div>
               <div class="work-togather-form">
                 <input
                   type="date"
-                  name="trip-start"
+                  name="date"
                   class="form-input-one subscribe-input"
                   placeholder="Date and time of recording"
                   min="2022-01-01" max="2024-12-31"
+                  value={inputdate}
+                  onChange={(e)=>setInputdate(e.target.value)}    
                   required 
                 />
               </div>
@@ -67,7 +115,7 @@ const ContactMe = () => {
             <div class="col-lg-3 col-md-4">
               <div class="work-togather-form-btn">
               <div><p></p></div>
-                <button type="submit" class="sec-btn">
+                <button type="submit" onClick={AddData} class="sec-btn">
                 Подать заявку
                 </button>
               </div>
